@@ -1,0 +1,107 @@
+<div style="height: 100% !import;   margin: 0;   padding: 0;top:180px;background-color:#fff;overflow-y:auto;overflow-x:hidden;margin-bottom:30px;">
+	<div style='margin-top:70px' class="col-sm-12 col-md-9 col-md-offset-2">
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="section-content">
+						<h4 class="title-text">
+						 Please enter all mandatory fields.
+						</h4>
+					</div>
+				</div>
+			</div>
+		</section>
+		<p></p>
+		<div style='clear:both'></div>
+		<div class="page-ads box">
+			<form class="form-ad" #postJob="ngForm">
+				<div class="form-group is-empty">
+				   <label class="control-label">Your Email</label>
+				   <input type="text" name="jobEmail" [(ngModel)]="jobEmail" class="form-control" placeholder="mail@example.com" />
+				   <span class="material-input" ></span>
+				</div>
+				<div class="form-group is-empty">
+				   <label class="control-label">Job Title</label>
+				   <input type="text" name="jobTitle" [(ngModel)]="jobTitle" class="form-control" />
+				   <span class="material-input" ></span>
+				</div>
+				<div class="form-group">
+				   <label class="control-label">Description</label>
+					<textarea  name="jobDescription" [(ngModel)]="jobDescription" class="note-codable form-control"></textarea>
+				</div>
+
+				<div class="form-group is-empty">
+				   <label class="control-label">
+					  Location
+					  <span>(optional)</span>
+				   </label>
+				   <input type="text" name="jobLocation" [(ngModel)]="jobLocation" class="form-control" placeholder="e.g.London" />
+				   <span class="material-input" ></span>
+				</div>
+
+				<div class="form-group is-empty">
+				   <label class="control-label">
+					  Years of Experienced Required 
+				   </label>
+				   <div >
+				   <input type="text"  name="jobMinExp" [(ngModel)]="jobMinExp" style='background-image: none;border: 1px solid #ccc;border-radius: 4px;' placeholder="  Min. Exp" /> - 
+				   <input type="text"  name="jobMaxExp" [(ngModel)]="jobMaxExp" style='background-image: none;border: 1px solid #ccc;border-radius: 4px;' placeholder="  Max. Exp" />
+				   </div>
+				   <span class="material-input" ></span>
+				</div>
+				
+				<div class="form-group is-empty">
+				   <label class="control-label">
+					  Designation
+				   </label>
+				   <input type="text" class="form-control"  name="jobDesignation" [(ngModel)]="jobDesignation" placeholder="e.g.London" />
+				   <span class="material-input" ></span>
+				</div>
+
+				<div class="form-group is-empty">
+				   <label class="control-label">
+					  Employment Type
+				   </label>
+					<select class="form-control"   name="jobEmploymentType" [(ngModel)]="jobEmploymentType"  >
+					  <option value="Permanent">Permanent</option>
+					  <option value="Contract">Contract</option>
+					  <option value="Freelance">Freelance</option>
+					</select>
+				   <span class="material-input" ></span>
+				</div>
+
+				<div class="form-group is-empty">
+				   <label class="control-label">Annual Compensation</label>
+				   <input type="text" name="jobAnnualCompensation" [(ngModel)]="jobAnnualCompensation" class="form-control" placeholder="" />
+				   <span class="material-input" ></span>
+				</div>
+
+				
+				
+				<div class="form-group is-empty">
+				   <label class="control-label" for="textarea">
+					  Job Tags
+					  <span>(optional)</span>
+				   </label>
+				   <input type="text"  name="jobTag" [(ngModel)]="jobTag"  class="form-control" placeholder="e.g.Sales, Accounts, BD" />
+				   <p class="note" style='text-align:left;'>Comma separate tags, such as required skills or technologies, for this job.</p>
+				   <span class="material-input" ></span>
+				</div>
+				
+				<div class="form-group is-empty">
+				   <label class="control-label">
+					  Closing Date
+					  <span>(optional)</span>
+				   </label>
+				   <input type="text" name="jobClosingDate" [(ngModel)]="jobClosingDate"  class="form-control" placeholder="DD-MM-YYYY" />
+				   <p class="note pull-left">Deadline for new applicants.</p>
+				   <span class="material-input" ></span>
+				</div>
+				<div style='clear:both;'></div>
+				<p></p>
+				<a (click) = "saveJob()" class="btn btn-common">Post Job</a>
+				<a routerLink="/user" class="btn btn-border" style='border-color : #FF4F57 !important;'>Cancel</a>
+			</form>
+		</div>
+    </div>
+</div>

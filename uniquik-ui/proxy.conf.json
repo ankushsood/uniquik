@@ -1,0 +1,14 @@
+{
+   "/open/*": {
+    "target": "http://localhost:5000",
+    "secure": false
+  },
+  "/springjwt/*": {
+    "target": "http://localhost:5000",
+    "secure": false
+  },
+  "/oauth/*": {
+    "target": "http://localhost:5000",
+    "secure": false
+  }
+}

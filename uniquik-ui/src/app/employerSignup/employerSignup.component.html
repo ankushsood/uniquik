@@ -1,0 +1,80 @@
+<div style="height: 100% !import;   margin: 0;   padding: 0;top:180px;background-color:#fff;overflow-y:auto;overflow-x:hidden;margin-bottom:30px;">
+	<div style='margin-top:70px' class="col-sm-12 col-md-9 col-md-offset-2">
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="section-content">
+						<h4 class="title-text">
+						 Sign up for access to a curated pool of active, skilled talent today.
+						</h4>
+					</div>
+				</div>
+			</div>
+		</section>
+		<p></p>
+		<div style='clear:both'></div>
+		<div class="page-ads box">
+			<form class="form-ad" #orgSignup="ngForm">
+				<div style='clear:both;'></div>
+					<p></p>
+				<div class="divider">
+				   <h3>Employer Details</h3>
+				</div>
+            <div class="form-group is-empty">
+               <label class="control-label">Organization Name</label>
+               <input type="text" class="form-control" name = "orgName" ngModel placeholder="Enter the name of the organization" />
+               <span class="material-input" ></span>
+            </div>
+            <div class="form-group is-empty">
+               <label class="control-label">
+                  Website
+                  <span>(optional)</span>
+               </label>
+               <input type="text" class="form-control" name = "orgWebsite" ngModel placeholder="http://" />
+               <span class="material-input" ></span>
+            </div>
+            <div class="form-group is-empty">
+               <label class="control-label">
+                  E-mail
+               </label>
+               <input type="text" class="form-control" name = "orgEmail" ngModel placeholder="" />
+               <span class="material-input" ></span>
+            </div>
+            <div class="form-group is-empty">
+               <label class="control-label">
+                  Password
+               </label>
+               <input type="password" class="form-control" name = "password" ngModel placeholder="" />
+               <span class="material-input" ></span>
+            </div>
+			            <div class="form-group is-empty">
+               <label class="control-label">
+                  Re-Enter Password
+               </label>
+               <input type="password" class="form-control" name = "confirmPassword" ngModel placeholder="" />
+               <span class="material-input" ></span>
+            </div>
+            <div class="form-group is-empty">
+               <label class="control-label">
+                  About Organization
+                  <span>(optional)</span>
+               </label>
+               <textarea name = "orgDetails" ngModel class="form-control" placeholder="Briefly describe your company"></textarea>
+               <span class="material-input" ></span>
+            </div>
+			
+            <!-- <div class="form-group"> -->
+               <!-- <div class="button-group"> -->
+                  <!-- <div class="action-buttons"> -->
+                     <!-- <div class="upload-button"> -->
+                        <!-- <button class="btn btn-common btn-sm">Browse</button> -->
+                        <!-- <input id="cover_img_file" type="file" /> -->
+                     <!-- </div> -->
+                  <!-- </div> -->
+               <!-- </div> -->
+            <!-- </div> -->
+            <a (click) = "saveOrgnazation()" class="btn btn-common">Signup</a>
+         </form>
+      </div>
+      </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="container" *ngIf="isLoaded">
+	<div class="row">
+		<div class='col-md-12' style='margin-bottom:50px;'>
+			<h4>
+				<a routerLink="/postJob" class="btn btn-common">Post New Job</a>
+				<a routerLink="/postJob" class="btn btn-common">Upload Candidate Data</a>
+			</h4>
+				<p></p>
+			<div class="form-group is-empty">
+				   <label class="control-label">
+				   Select Employer
+				   </label>
+					<select class="form-control" (change)="onEmployerChange($event.target.value)"  name="selectedOrg" [(ngModel)]="selectedOrg"  >
+						<option *ngFor="let org of users$" value="{{org.username}}">{{org.firstName}}</option>
+					</select>
+				   <span class="material-input" ></span>
+				</div>
+
+				
+			<!-- Start Purchase Section -->
+			
+			<section class="find-job section">
+			  <div class="">
+				<h2 class="section-title">Hello {{loggedInUser.firstName}}, Jos Posted by {{selectedOrg}}:</h2>
+				<div class="row">
+				  <div  *ngFor="let job of jobs; index as i;" class="col-md-12 job-list">
+					<div   class="">
+					  <div class="job-list-content">
+						<h4><span>{{job.jobTitle}}</span></h4>
+						<div style='clear:both;'></div>
+							<span class="">{{job.jobDesignation}}</span>
+							<div style='clear:both;'></div>
+							<span class="">{{job.jobEmploymentType}}</span>
+							<div style='clear:both;'></div>
+							<span class="">{{job.jobMinExp}}-{{job.jobMaxExp}} years</span>
+							<p></p>
+						<p>{{job.jobDescription}}</p>
+						<div class="job-tag">
+						  <div class="pull-left">
+							<div class="meta-tag">
+							  <span><a href="browse-categories.html"><i class="ti-brush"></i>{{job.jobTag}}</a></span>
+							  <span><i class="ti-location-pin"></i>{{job.jobLocation}}</span>
+							  <span>Rs. {{job.jobAnnualCompensation}}</span>
+							</div>
+						  </div>
+						  
+						</div>
+						<div class='clearfix'></div>
+						<div style='margin-top:10px'>
+						<span (click) = "editJob(job)" class="part-time">Edit</span>
+						<span (click) = "deleteJob(job)" class="full-time">Delete</span>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+			  </div>
+		</section>
+	</div>
+</div>
+</div>
+
