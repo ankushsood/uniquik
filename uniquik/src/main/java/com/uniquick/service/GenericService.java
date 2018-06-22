@@ -2,6 +2,7 @@ package com.uniquick.service;
 
 import java.util.List;
 
+import com.uniquick.domain.Candidate;
 import com.uniquick.domain.Job;
 import com.uniquick.domain.Organization;
 import com.uniquick.domain.RandomCity;
@@ -32,4 +33,6 @@ public interface GenericService {
     void deleteJob(long id);
     
     Job getJobById(long id);
+    
+    Iterable<Candidate> saveCandidates(List<Candidate> candidates);
 }

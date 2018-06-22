@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.uniquick.domain.Candidate;
 import com.uniquick.domain.Job;
 import com.uniquick.domain.Organization;
 import com.uniquick.domain.RandomCity;
 import com.uniquick.domain.Role;
 import com.uniquick.domain.User;
+import com.uniquick.repository.CandidateRepository;
 import com.uniquick.repository.JobRepository;
 import com.uniquick.repository.OrganizationRepository;
 import com.uniquick.repository.RandomCityRepository;
@@ -30,6 +32,8 @@ public class GenericServiceImpl implements GenericService {
     private OrganizationRepository organizationRepository;
     @Autowired
     private JobRepository jobRepository;
+    @Autowired
+    private CandidateRepository candidateRepository;
 
     @Override
     public User findByUsername(String username) {
@@ -89,5 +93,10 @@ public class GenericServiceImpl implements GenericService {
 	@Override
 	public Iterable<Job> findAllJobs() {
 		return jobRepository.findAll();
+	}
+	
+	@Override
+	public Iterable<Candidate> saveCandidates(List<Candidate> candidates) {
+		return candidateRepository.save(candidates);
 	}
 }
