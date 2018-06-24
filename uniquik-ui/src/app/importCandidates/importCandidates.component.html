@@ -1,0 +1,25 @@
+<div
+	style="height: 100%!import; margin: 0; padding: 0; top: 180px; background-color: #fff; overflow-y: auto; overflow-x: hidden; margin-bottom: 30px;">
+	<div style='margin-top: 70px'
+		class="col-sm-12 col-md-9 col-md-offset-2">
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="section-content">
+
+
+
+
+
+						<div style="text-align: center">
+							<label> <input type="file" class="btn btn-common" (change)="selectFile($event)">
+							</label>
+							<button [disabled]="!selectedFiles" class="btn btn-common" (click)="upload()">Upload</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<p></p>
+	</div>
+</div>

@@ -1,9 +1,9 @@
       <!-- Header Section Start -->
-      <div class="header row">    
+      <div class="" style='border-bottom:solid 1px #FF4F57;'>    
 	  
         <!-- Start intro section -->
         <section id="intro" class="section-intro hide-mobile" >
-          <div class="logo-menu" style='height:20px'>
+          <div class="logo-menu" style='height:60px'>
               <div class="container">
 		        <a class=""  routerLink="/home"><img style='width:220px;padding-bottom:50px;' src="assets/img/logo.png" alt=""></a>
 				<cuppa-slidemenu  *ngIf="isLoggedIn == 'true'" [config]="config" [menulist]="adminMenuItemsArray" (open)="onMenuOpen()" (close)="onMenuClose()" (onItemSelect)="onItemSelect($event)" style='float:right;backgroung-color:#FF4F57 !important;'></cuppa-slidemenu>
@@ -18,7 +18,7 @@
 		
 		        <section id="intro" class=" hide-main section-intro">
           <div class="logo-menu">
-            <nav class="navbar navbar-default affix" role="navigation"  style='position:static !important;'>
+            <nav class="navbar navbar-default affix" role="navigation"  style='position:static !important;margin-bottom: 0 !important;border: 0 !important;'>
               <div class="container">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header">
@@ -53,10 +53,17 @@
 	  
 	  </section>
 	  </div>
+
       <!-- Header Section End -->    
 
 <app-spinner> </app-spinner>
-  <router-outlet></router-outlet>
+  
+	<div class="row">
+		<div class='col-md-12' style='min-height:700px !important;margin-bottom:50px;'>
+			<router-outlet></router-outlet>
+		</div>
+	</div>
+  
  
 
 

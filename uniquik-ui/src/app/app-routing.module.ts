@@ -11,6 +11,7 @@ import {UserComponent} from './user/user.component';
 import {EmployerSignupComponent} from './employerSignup/employerSignup.component';
 import {CandidateSignupComponent} from './candidateSignup/candidateSignup.component';
 import {PostJobComponent} from './postJob/postJob.component';
+import { ImportCandidateDataComponent } from './importCandidates/importCandidates.component';
 
 const routes: Routes = [
 
@@ -44,7 +45,12 @@ const routes: Routes = [
   {
     path: 'postJob',
     component: PostJobComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, AdminAuthGuard]
+  },
+  {
+    path: 'importCandidates',
+    component: ImportCandidateDataComponent,
+    canActivate: [AuthGuard, AdminAuthGuard]
   },
   {
     path: '**',

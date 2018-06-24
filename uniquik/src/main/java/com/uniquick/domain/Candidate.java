@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "candidate")
@@ -83,8 +84,16 @@ public class Candidate {
     @Column(name = "timestamp_5")
     private String timestamp5;
     
+
+    @Transient
+    private Integer matchedScore;
     
-    
+	public Integer getMatchedScore() {
+		return matchedScore;
+	}
+	public void setMatchedScore(Integer matchedScore) {
+		this.matchedScore = matchedScore;
+	}
 	public Long getId() {
 		return id;
 	}

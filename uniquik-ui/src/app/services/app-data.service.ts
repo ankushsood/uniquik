@@ -73,4 +73,11 @@ export class AppDataService {
 		return this.http.post('/springjwt/updateJob',  JSON.stringify(formData), {
 		});
 	}
+	
+	findMatchingCandidates(formData){
+        console.log(formData)
+        let headers = new HttpHeaders({'Content-Type': 'application/json'});
+        return this.http.post('/springjwt/findMatchingCandidates',  JSON.stringify(formData), {
+        });
+    }
 }

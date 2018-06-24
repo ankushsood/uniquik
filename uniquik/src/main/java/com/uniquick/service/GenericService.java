@@ -1,6 +1,7 @@
 package com.uniquick.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.uniquick.domain.Candidate;
 import com.uniquick.domain.Job;
@@ -35,4 +36,8 @@ public interface GenericService {
     Job getJobById(long id);
     
     Iterable<Candidate> saveCandidates(List<Candidate> candidates);
+    
+    List<Candidate> findbyEmail(Set<String> candidates);
+    
+    List<Candidate> findMatchingCandidates(Job job);
 }

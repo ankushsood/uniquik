@@ -25,6 +25,7 @@ import {TOKEN_NAME} from './services/auth.constant';
 import {AppDataService} from './services/app-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
+import { ImportCandidateDataComponent } from './importCandidates/importCandidates.component';
 
 
 export function authHttpServiceFactory(http: Http) {
@@ -48,6 +49,7 @@ export function authHttpServiceFactory(http: Http) {
     LoginComponent,
 	EmployerSignupComponent,
 	CandidateSignupComponent,
+	ImportCandidateDataComponent,
 	PostJobComponent	
   ],
   imports: [

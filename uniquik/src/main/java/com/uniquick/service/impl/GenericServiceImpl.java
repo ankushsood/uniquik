@@ -1,6 +1,10 @@
 package com.uniquick.service.impl;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -98,5 +102,62 @@ public class GenericServiceImpl implements GenericService {
 	@Override
 	public Iterable<Candidate> saveCandidates(List<Candidate> candidates) {
 		return candidateRepository.save(candidates);
+	}
+	
+	@Override
+	public List<Candidate> findbyEmail(Set<String> candidates) {
+		return candidateRepository.findByEmail(candidates);
+	}
+	
+	@Override
+	public List<Candidate> findMatchingCandidates(Job job) {
+		List<Candidate> matchedCandidates = new ArrayList<>();
+		Iterable<Candidate> candidates = candidateRepository.findAll();
+		
+		for (Candidate candidate : candidates) {
+			Integer matchedScore = 0;
+			String jobLocationArr []= job.getJobLocation().split(",");
+			for (int i = 0; i < jobLocationArr.length; i++) {
+				if(candidate.getPreferredLocation().toLowerCase().contains(jobLocationArr[i].toLowerCase())){
+					matchedScore++;
+					break;
+				}
+			}
+			
+
+			String jobTags []= job.getJobTag().split(",");
+			for (int i = 0; i < jobTags.length; i++) {
+				if(candidate.getResumeTitle().toLowerCase().contains(jobTags[i]) || candidate.getCurrentDesignation().toLowerCase().contains(jobTags[i])){
+					matchedScore++;
+					break;
+				}
+			}
+			
+/*			String jobTags []=  obTag().split(",");
+			if(candidate.getWorkExperience().equals(anObject)ResumeTitle().toLowerCase().contains(jobTags[i]) || candidate.getCurrentDesignation().toLowerCase().contains(jobTags[i])){
+					matchedScore++;
+					break;
+				}
+			}
+*/
+			
+			
+			
+			if(matchedScore  > 0){
+				candidate.setMatchedScore(matchedScore);
+				matchedCandidates.add(candidate);
+			}
+		}
+		
+		Collections.sort(matchedCandidates , new SortbyMatchingScore());
+		return matchedCandidates;
+	}
+	
+	class SortbyMatchingScore implements Comparator<Candidate>
+	{
+	    public int compare(Candidate a, Candidate b)
+	    {
+	        return b.getMatchedScore().compareTo(a.getMatchedScore());
+	    }
 	}
 }

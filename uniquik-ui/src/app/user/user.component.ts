@@ -35,12 +35,13 @@ export class UserComponent implements OnInit {
 			this.jobs = JSON.parse(this.jobs._body);
 			this.loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 			this.spinnerService.hide();
-
+			this.isLoaded = true;
 		} , error =>{
 				console.log(error);
+	            this.isLoaded = true;
+
 				this.spinnerService.hide();
           });;
-    //this.city$ = this.appDataService.getCities();
   }
   
   editJob(job){

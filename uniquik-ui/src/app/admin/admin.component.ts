@@ -12,6 +12,7 @@ import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 export class AdminComponent implements OnInit {
 	users$;
 	jobs : any = [];
+	matchedCandidates : any = [];
 	userJobs : any = []
 	loggedInUser : any;
 	isLoaded : boolean = false;
@@ -58,5 +59,41 @@ export class AdminComponent implements OnInit {
 
 	}
 	
+	
+	  editJob(job){
+	      localStorage.setItem('editJob', JSON.stringify(job));
+	      this.router.navigateByUrl('postJob');
+
+	      
+	  }
+	  
+	  deleteJob(job){
+	    this.spinnerService.show();
+	    this.appDataService.deleteJob(job).subscribe(
+	          data =>{
+	            this.jobs = JSON.parse(data.text());
+	            this.spinnerService.hide();
+
+	          } , error =>{
+	                console.log(error);
+	                this.spinnerService.hide();
+
+	          });;
+	  }
+	  
+	  findMatchingCandidates(job){
+	        this.spinnerService.show();
+	        this.appDataService.findMatchingCandidates(job).subscribe(
+	              data =>{
+	                this.matchedCandidates = JSON.parse(data.text());
+	                this.spinnerService.hide();
+
+	              } , error =>{
+	                    console.log(error);
+	                    this.spinnerService.hide();
+
+	              });;
+	      
+	  }
   
 }

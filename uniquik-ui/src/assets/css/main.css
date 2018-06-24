@@ -2066,7 +2066,7 @@ footer {
 .job-list {
   border: 1px solid #f1f1f1;
   padding: 15px;
-  display: inline-block;
+  display: block;
   margin-bottom: 15px;
 }
 .job-list .thumb {
@@ -3483,3 +3483,18 @@ blockquote p a:hover {
   border: none;
   background: transparent;
 }
+
+
+.cuppa-menu ul > li > a {
+    display: block;
+    padding: 15px 30px;
+    background: #fff;
+    text-decoration: none;
+    border-bottom: 1px solid #ff4f57 !important;
+    transition: all .3s linear;
+    color: #ff4f57 !important;
+}
+
+.la-ball-clip-rotate-multiple.la-3x { height: 96px !important; top: 40% !important; left: 46% !important; }
+
+.hamburger {padding : 15px 0px !important;}
