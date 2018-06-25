@@ -27,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { ImportCandidateDataComponent } from './importCandidates/importCandidates.component';
 
+import { CandidateListComponent } from './candidateList/candidateList.component';
 
 export function authHttpServiceFactory(http: Http) {
 	console.log('aaaaaaaaaaaa');
@@ -50,7 +51,8 @@ export function authHttpServiceFactory(http: Http) {
 	EmployerSignupComponent,
 	CandidateSignupComponent,
 	ImportCandidateDataComponent,
-	PostJobComponent	
+	PostJobComponent,
+	CandidateListComponent
   ],
   imports: [
     BrowserModule,
