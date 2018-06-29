@@ -3498,3 +3498,4 @@ blockquote p a:hover {
 .la-ball-clip-rotate-multiple.la-3x { height: 96px !important; top: 40% !important; left: 46% !important; }
 
 .hamburger {padding : 15px 0px !important;}
+.cuppa-menu  ul > li > a.active{background : #fff !important;}
