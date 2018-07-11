@@ -26,6 +26,8 @@ import {AppDataService} from './services/app-data.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { ImportCandidateDataComponent } from './importCandidates/importCandidates.component';
+import { SlimScroll } from 'angular4-slimscroll';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 export function authHttpServiceFactory(http: Http) {
@@ -50,7 +52,9 @@ export function authHttpServiceFactory(http: Http) {
 	EmployerSignupComponent,
 	CandidateSignupComponent,
 	ImportCandidateDataComponent,
-	PostJobComponent	
+	PostJobComponent,
+	SlimScroll,
+	
   ],
   imports: [
     BrowserModule,
@@ -59,7 +63,9 @@ export function authHttpServiceFactory(http: Http) {
 	HttpClientModule,
     AppRoutingModule,
 	SlideMenuModule,
-	Ng4LoadingSpinnerModule	
+	Ng4LoadingSpinnerModule,
+    NgbModalModule.forRoot(),
+
   ],
   providers: [
     {provide: AuthHttp, useFactory: authHttpServiceFactory, deps: [Http]},

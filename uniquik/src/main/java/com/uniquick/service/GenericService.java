@@ -27,7 +27,7 @@ public interface GenericService {
     
     List<Job> findJobsByOrg(String orgUsername);
     
-    Iterable<Job> findAllJobs();
+    List<Job> findAllJobs();
 
     User findUserByUsername(String orgUsername);
     

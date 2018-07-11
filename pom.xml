@@ -9,7 +9,7 @@
     <description>uniquik parent</description>
 
     <modules>
-        <module>uniquik-ui</module>
+        <!-- <module>uniquik-ui</module> -->
 		<module>uniquik</module>
         
     </modules>

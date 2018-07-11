@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.uniquick.domain.Job;
 import com.uniquick.domain.Organization;
 import com.uniquick.domain.Role;
 import com.uniquick.domain.User;
@@ -35,6 +38,13 @@ public class OpenController {
         user.setRoles(standardUserRoles);
     	user.setLastName("");
     	userService.saveUser(user);
+    	
     	return userService.saveOrganization(organization);
     }
+
+    @RequestMapping(value ="/findAllJobs",  method={RequestMethod.GET}, produces={"application/json" })
+    public List<Job> getJobs(){
+        return userService.findAllJobs();
+    }
+
 }

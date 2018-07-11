@@ -1,17 +1,46 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import { ChangeDetectorRef } from '@angular/core';
-
+import {
+    trigger,
+    state,
+    style,
+    animate,
+    transition
+  } from '@angular/animations';
 import {UserService} from './services/user.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  animations: [
+               trigger('collapse', [
+                 state('open', style({
+                   opacity: '1',
+                   display: 'block',
+                   transform: 'translate3d(0, 0, 0)'
+                 })),
+                 state('closed',   style({
+                   opacity: '0',
+                   display: 'none',
+                   transform: 'translate3d(0, -100%, 0)'
+                 })),
+                 transition('closed => open', animate('200ms ease-in')),
+                 transition('open => closed', animate('100ms ease-out'))
+               ])
+             ]
 })
 export class AppComponent  implements OnInit{
   title = 'Angular SpringBoot JWT integration';
 	isLoggedIn : any = null;
+
+  isIn = false;   // store state
+  toggleState() { // click handler
+      let bool = this.isIn;
+      this.isIn = bool === false ? true : false; 
+  }
+  
   constructor(private router: Router, private userService: UserService, private cdRef:ChangeDetectorRef) {
   
   }

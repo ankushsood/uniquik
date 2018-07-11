@@ -9,4 +9,8 @@ import com.uniquick.domain.Job;
 public interface JobRepository extends CrudRepository<Job, Long> {
 	
 	List<Job>findByOrgUsername(String orgUsername);
+	
+	List<Job> findAll();
+	
+	
 }

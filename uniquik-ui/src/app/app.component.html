@@ -1,61 +1,30 @@
-      <!-- Header Section Start -->
-      <div class="" style='border-bottom:solid 1px #FF4F57;'>    
-	  
-        <!-- Start intro section -->
-        <section id="intro" class="section-intro hide-mobile" >
-          <div class="logo-menu" style='height:60px'>
-              <div class="container">
-		        <a class=""  routerLink="/home"><img style='width:220px;padding-bottom:50px;' src="assets/img/logo.png" alt=""></a>
-				<cuppa-slidemenu  *ngIf="isLoggedIn == 'true'" [config]="config" [menulist]="adminMenuItemsArray" (open)="onMenuOpen()" (close)="onMenuClose()" (onItemSelect)="onItemSelect($event)" style='float:right;backgroung-color:#FF4F57 !important;'></cuppa-slidemenu>
 
-				<cuppa-slidemenu  *ngIf="isLoggedIn == 'false'"  [config]="config" [menulist]="userMenuItemsArray" (open)="onMenuOpen()" (close)="onMenuClose()" (onItemSelect)="onItemSelect($event)" style='float:right;color:#FF4F57 !important;'></cuppa-slidemenu>
-
-				<cuppa-slidemenu  *ngIf="isLoggedIn == null"  [config]="config" [menulist]="loginMenuItemsArray" (open)="onMenuOpen()" (close)="onMenuClose()" (onItemSelect)="onItemSelect($event)" style='float:right;color:#FF4F57 !important;'></cuppa-slidemenu>
-				</div>
+	
+	<nav class="navbar navbar-inverse" style='background-color:#333 !important;'>
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					(click)="toggleState()">
+					<span class="sr-only">Toggle navigation</span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span> 
+					<span class="icon-bar"></span>
+				</button>
+				<a class="" routerLink="/home"> <img style='width: 220px;' src="assets/img/logo-footer.png">
+				</a>
 			</div>
-		</section>
-		
-		
-		        <section id="intro" class=" hide-main section-intro">
-          <div class="logo-menu">
-            <nav class="navbar navbar-default affix" role="navigation"  style='position:static !important;margin-bottom: 0 !important;border: 0 !important;'>
-              <div class="container">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                  <a class="navbar-brand logo"  routerLink="/home"><img style='width:220px;padding-bottom:5px;' src="assets/img/logo.png" alt=""></a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="navbar">              
-                <!-- Start Navigation List -->
-                
-					<ul class="nav navbar-nav navbar-right float-right">
-					  <li *ngIf="isLoggedIn == 'true'" class="left"><a routerLink="/admin"><i class="ti-pencil-alt"></i>Find Candidates</a></li>
-					  <li *ngIf="isLoggedIn == 'false'" class="left"><a routerLink="/user"><i class="ti-pencil-alt"></i>Mange Jobs</a></li>
-					  <li *ngIf="isLoggedIn == null" class="right"><a routerLink="/login"><i class="ti-lock"></i>  Log In</a></li>
-					  <li *ngIf="isLoggedIn != null" class="right"><a (click)="logout()" ><i class="ti-lock"></i>  Log out</a></li>
-					</ul>
-				  </div>                           
+			<div class="collapse navbar-collapse textwidget" [ngClass]="{ 'in': isIn }" >
+				<ul class="nav navbar-nav">
+					<li><a class="" *ngIf="isLoggedIn == null" (click)="toggleState()" routerLink="/login" style='color:#FF4F57 !important;font-size: 14px !important;font-weight: 300 !important;line-height: 24px !important;'>Login</a></li>
+					<li><a class="" *ngIf="isLoggedIn == 'true'" (click)="toggleState()" routerLink="/admin" style='color:#FF4F57 !important;font-size: 14px !important;font-weight: 300 !important;line-height: 24px !important;'>Find Candidates</a></li>
+					<li><a class="" *ngIf="isLoggedIn == 'false'" (click)="toggleState()" routerLink="/user" style='color:#FF4F57 !important;font-size: 14px !important;font-weight: 300 !important;line-height: 24px !important;'>Find Jobs</a></li>
+					<li><a class="" *ngIf="isLoggedIn != null" (click)="toggleState();logout()" style='color:#FF4F57 !important;font-size: 14px !important;font-weight: 300 !important;line-height: 24px !important;'>Logout</a></li>
+				</ul>
 			</div>
-          
-		  </nav>
-
-
-      </div>
-	  
-	  
-	  
-	  
-	  </section>
-	  </div>
-
-      <!-- Header Section End -->    
-
+		</div>
+	</nav>
+	
+	
 <app-spinner> </app-spinner>
   
 	<div class="row">

@@ -1081,3 +1081,14 @@ body #page-container .main-slider .et_pb_slide_0 .et_pb_container .et_pb_slide_d
 
 
 
+.navbar-fixed-top.scrolled {
+  background-color: #4b0082 !important;
+  transition: background-color 200ms linear;
+}
+
+.navbar-fixed-top.onTop{
+  background-color: #4b0082;
+  opacity:.6;
+  transition: background-color 200ms linear;
+	
+}

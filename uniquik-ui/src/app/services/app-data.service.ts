@@ -39,7 +39,9 @@ export class AppDataService {
 	}
 
 	getAllJobs() {
-		return this.http.get('/springjwt/findAllJobs/')
+        let headers = new HttpHeaders({'Content-Type': 'application/json'});
+
+	    return this.openHttp.get('/open/findAllJobs/')
 		  .map((response) => {
 			return response;
 		});

@@ -225,11 +225,6 @@ public class ResourceController {
         return userService.findJobsByOrg(orgUsername);
     }
 
-    @RequestMapping(value ="/findAllJobs",  method={RequestMethod.GET},consumes={"application/json" },produces={"application/json" })
-    @PreAuthorize("hasAuthority('ADMIN_USER')")
-    public Iterable<Job> getAllJobs(){
-        return userService.findAllJobs();
-    }
     
     private String getCellValue(XSSFRow row, int cellId){
     	Cell c = row.getCell(cellId);

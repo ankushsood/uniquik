@@ -672,6 +672,7 @@ a:focus {
   .navbar-brand {
     position: absolute;
     top: 0;
+    float:right;
   }
   .tbtn {
     display: none;
@@ -694,6 +695,10 @@ a:focus {
 @media screen and (max-width: 768px) {
 	
 	
+	.fknomore{
+		border : 0;
+	}
+	
  .hide-mobile{
 	 display:block;
  }
@@ -715,7 +720,7 @@ display:none;
 	
 	.about-width{width: 100% !important;}
   .navbar-toggle {
-    display: none;
+ 		
   }
   .tbtn {
     display: none;
@@ -2064,10 +2069,9 @@ footer {
   -o-transition: all 0.2s ease-in-out;
 }
 .job-list {
-  border: 1px solid #f1f1f1;
+  border-top: 1px solid #f1f1f1;
   padding: 15px;
   display: block;
-  margin-bottom: 15px;
 }
 .job-list .thumb {
   float: left;
@@ -2087,9 +2091,8 @@ footer {
   margin-bottom: 20px;
 }
 .job-list .job-tag {
-  border-top: 1px solid #ddd;
-  padding: 15px 0;
-  line-height: 35px;
+  padding: 0 15px 15px 0;
+  /* line-height: 35px; */
 }
 .job-list .job-tag .meta-tag span {
   font-size: 14px;
@@ -3317,6 +3320,14 @@ blockquote p a:hover {
     line-height: 70px;
   }
 }
+
+@media (min-width: 768px){
+.navbar-nav {
+    float: right !important;
+    margin: 0;
+}
+}
+
 #cd-login,
 #cd-signup,
 #cd-reset-password {
@@ -3498,3 +3509,14 @@ blockquote p a:hover {
 .la-ball-clip-rotate-multiple.la-3x { height: 96px !important; top: 40% !important; left: 46% !important; }
 
 .hamburger {padding : 15px 0px !important;}
+.modal-backdrop.fade{
+	opacity: 0.6 !important;	
+}
+
+.fade{
+	opacity : 1 !important;	
+}
+
+.close{
+	opacity : 1 !important;
+}

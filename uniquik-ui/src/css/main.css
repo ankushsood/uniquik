@@ -693,7 +693,9 @@ a:focus {
  .about-width{width: 62% !important;}
 @media screen and (max-width: 768px) {
 	
-	
+	.fknomore{
+		border : 0;
+	}
  .hide-mobile{
 	 display:block;
  }
@@ -715,7 +717,7 @@ display:none;
 	
 	.about-width{width: 100% !important;}
   .navbar-toggle {
-    display: none;
+   /*  display: none; */
   }
   .tbtn {
     display: none;
@@ -2064,10 +2066,9 @@ footer {
   -o-transition: all 0.2s ease-in-out;
 }
 .job-list {
-  border: 1px solid #f1f1f1;
+  border-top: 1px solid #f1f1f1;
   padding: 15px;
   display: block;
-  margin-bottom: 15px;
 }
 .job-list .thumb {
   float: left;
@@ -2087,9 +2088,9 @@ footer {
   margin-bottom: 20px;
 }
 .job-list .job-tag {
-  border-top: 1px solid #ddd;
-  padding: 15px 0;
-  line-height: 35px;
+  /*border-top: 1px solid #ddd;*/
+  padding: 20px;
+  /* line-height: 35px; */
 }
 .job-list .job-tag .meta-tag span {
   font-size: 14px;
@@ -3498,3 +3499,11 @@ blockquote p a:hover {
 .la-ball-clip-rotate-multiple.la-3x { height: 96px !important; top: 40% !important; left: 46% !important; }
 
 .hamburger {padding : 15px 0px !important;}
+
+.modal-backdrop.fade{
+	opacity: 0.6 !important;	
+}
+
+.fade{
+	opacity : 1 !important;	
+}

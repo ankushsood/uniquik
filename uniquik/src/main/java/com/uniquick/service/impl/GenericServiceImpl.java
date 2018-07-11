@@ -95,7 +95,7 @@ public class GenericServiceImpl implements GenericService {
 	}
 	
 	@Override
-	public Iterable<Job> findAllJobs() {
+	public List<Job> findAllJobs() {
 		return jobRepository.findAll();
 	}
 	

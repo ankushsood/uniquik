@@ -1,27 +1,216 @@
+<section class=" purchase row" style='background-color:#333'>
+	<div style='padding: 15px;'>
+		<div class="">
+			<div class="section-content text-center">
 
-    <section class=" purchase row">
-      <div >
-        <div class="">
-          <div class="section-content text-center">
-            <h1 class="title-text">
-             Looking for skilled Professionals
-            </h1>
-            <p>Join us to access a curated pool of active, skilled talent today.</p>
-            <a *ngIf="isLoggedIn == null"  routerLink="/employerSignup" class="btn btn-common">Get Started Now</a>
-          </div>
-        </div>
+				<h1 class="title-text">LOOKING FOR A JOB!</h1>
+				<p>Join thousand of employers and earn what you deserve!</p>
+				<a *ngIf="isLoggedIn == null" routerLink="/candidateSignup"
+					class="btn btn-common">Get Started Now</a>
+			</div>
+		</div>
+	</div>
+</section>
+
+<br/>
+<section style='padding:10px;' class="find-job section">
+		<h2 class="section-title">Latest Job Openings</h2>
+	<div class="container" ><!-- container-fluid text-center bg-grey -->
+		<div slimScroll allowPageScroll="true" width="auto" height="250px" size="7px" class="row" >
+			<div  *ngFor="let job of jobs; index as i;"
+				class="col-md-12 job-list">
+				<div class="job-list-content">
+					<h4>
+						<span>{{job.jobTitle}}</span> <span
+							style="font-size: 12px; padding-right: 15px;" class="pull-right">{{job.jobMinExp}}-{{job.jobMaxExp}}
+							years</span>
+					</h4>
+					<div class="job-tag">
+						<div class="pull-left">
+							<div class="meta-tag">
+								<div style='clear: both;'></div>
+								<span><i class="ti-location-pin"></i>{{job.jobLocation}}</span>
+								<span><span>Rs.</span>{{job.jobAnnualCompensation}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div (click)="open(content)" *ngFor="let job of jobs; index as i;"
+				class="col-md-12 job-list">
+				<div class="job-list-content">
+					<h4>
+						<span>{{job.jobTitle}}</span> <span
+							style="font-size: 12px; padding-right: 15px;" class="pull-right">{{job.jobMinExp}}-{{job.jobMaxExp}}
+							years</span>
+					</h4>
+					<div class="job-tag">
+						<div class="pull-left">
+							<div class="meta-tag">
+								<div style='clear: both;'></div>
+								<span><i class="ti-location-pin"></i>{{job.jobLocation}}</span>
+								<span><span>Rs.</span>{{job.jobAnnualCompensation}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div (click)="open(content)" *ngFor="let job of jobs; index as i;"
+				class="col-md-12 job-list">
+				<div class="job-list-content">
+					<h4>
+						<span>{{job.jobTitle}}</span> <span
+							style="font-size: 12px; padding-right: 15px;" class="pull-right">{{job.jobMinExp}}-{{job.jobMaxExp}}
+							years</span>
+					</h4>
+					<div class="job-tag">
+						<div class="pull-left">
+							<div class="meta-tag">
+								<div style='clear: both;'></div>
+								<span><i class="ti-location-pin"></i>{{job.jobLocation}}</span>
+								<span><span>Rs.</span>{{job.jobAnnualCompensation}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div (click)="open(content)" *ngFor="let job of jobs; index as i;"
+				class="col-md-12 job-list">
+				<div class="job-list-content">
+					<h4>
+						<span>{{job.jobTitle}}</span> <span
+							style="font-size: 12px; padding-right: 15px;" class="pull-right">{{job.jobMinExp}}-{{job.jobMaxExp}}
+							years</span>
+					</h4>
+					<div class="job-tag">
+						<div class="pull-left">
+							<div class="meta-tag">
+								<div style='clear: both;'></div>
+								<span><i class="ti-location-pin"></i>{{job.jobLocation}}</span>
+								<span><span>Rs.</span>{{job.jobAnnualCompensation}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div (click)="open(content)" *ngFor="let job of jobs; index as i;"
+				class="col-md-12 job-list">
+				<div class="job-list-content">
+					<h4>
+						<span>{{job.jobTitle}}</span> <span
+							style="font-size: 12px; padding-right: 15px;" class="pull-right">{{job.jobMinExp}}-{{job.jobMaxExp}}
+							years</span>
+					</h4>
+					<div class="job-tag">
+						<div class="pull-left">
+							<div class="meta-tag">
+								<div style='clear: both;'></div>
+								<span><i class="ti-location-pin"></i>{{job.jobLocation}}</span>
+								<span><span>Rs.</span>{{job.jobAnnualCompensation}}</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="col-md-12">
+				<!-- <div class="showing pull-right">
+					<a (click)="fetchNextJobs()" href="#"><span>View More</span></a>
+				</div> -->
+			</div>
+		</div>
+	</div>
+</section>
+
+
+
+<div id="portfolio" class="container-fluid bg-grey">
+  <h2 class="section-title">Clients & Partners</h2><br>
+  <div class="col-sm-12 text-center slideanim">
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="assets/img/clients/img1.png" alt="Paris" height="200">
+        <p><strong></strong></p>
+        <p></p>
       </div>
-    </section>
-
+    </div>
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="assets/img/clients/img2.png" alt="New York" height="200">
+        <p><strong></strong></p>
+        <p></p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="assets/img/clients/img3.png" alt="San Francisco" height="200">
+        <p><strong></strong></p>
+        <p></p>
+      </div>
+    </div>
+  </div><br>
+    <div class="col-sm-12 text-center slideanim">
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="assets/img/clients/img1.png" alt="Paris" height="200">
+        <p><strong></strong></p>
+        <p></p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="assets/img/clients/img2.png" alt="New York" height="200">
+        <p><strong></strong></p>
+        <p></p>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="thumbnail">
+        <img src="assets/img/clients/img3.png" alt="San Francisco" height="200">
+        <p><strong></strong></p>
+        <p></p>
+      </div>
+    </div>
+  </div><br>
+</div>
 
 
 <div class="container">
-			<div class="row">
+	<div class="row">
+		<div class='col-md-12' style='margin-bottom: 50px;'></div>
 
-
-<div class='col-md-12' style='margin-bottom:50px;'>
-
+	</div>
 </div>
 
-</div>
-   </div>
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+	<div class="modal-header">
+    	<h4 class="modal-title" id="modal-basic-title">
+	        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+	    	  <span aria-hidden="true">&times;</span>
+		    </button>
+    	</h4>
+  	</div>
+  	<div class="modal-body" >
+    	<div style='overflow:auto !important;max-height:300px !important;'>
+      		<div class="form-group">
+        		<label for="dateOfBirth">Date of birth</label>
+        		<div class="input-group">
+          			<div class="input-group-append">
+        	
+          			</div>
+        		</div>
+      		</div>
+    	</div>
+  	</div>
+</ng-template>
