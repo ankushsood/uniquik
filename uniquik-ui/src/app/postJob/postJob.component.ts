@@ -124,7 +124,13 @@ private postJobForm: NgForm;
 	}		
 	  this.appDataService.saveJob(job).subscribe(
           data =>{
-            this.router.navigate(['/user']);
+          
+          	let isAdmin =  localStorage.getItem('isAdmin');
+          	if(isAdmin == 'true'){
+          		this.router.navigate(['/admin']);
+          	}else{
+            	this.router.navigate(['/user']);
+            }
 			this.spinnerService.hide();
 
           } , error =>{
@@ -139,6 +145,15 @@ private postJobForm: NgForm;
       this.router.navigateByUrl(this.redirectUrl);
     } else {
       this.router.navigate(['/']);
+    }
+  }
+  
+  cancelJobUpdte(){
+  	let isAdmin =  localStorage.getItem('isAdmin');
+    if(isAdmin == 'true'){
+    	this.router.navigate(['/admin']);
+    }else{
+    	this.router.navigate(['/user']);
     }
   }
 }

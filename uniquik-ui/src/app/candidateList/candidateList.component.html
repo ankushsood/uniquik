@@ -1,0 +1,46 @@
+	  <br/><br/>
+<div class="container" *ngIf="isLoaded">
+	<div class="row">
+		<div class='col-md-12' style='margin-bottom:50px;'>
+			<h4>
+				Matching Candidates
+			</h4>
+				<p></p>
+				
+			<section class="find-job section">
+				<div class="">
+					<div  *ngFor="let candidate of matchedCandidates; index as i;" class="col-md-12 job-list">
+						<div   class="">
+							<div class="job-list-content">
+								<h4><span>{{candidate.candidateName}}</span></h4>
+								<div style='clear:both;'></div>
+								<span class="">{{candidate.resume_title}}</span>
+								<div style='clear:both;'></div>
+								<span class="">{{candidate.email}}</span>
+								<div style='clear:both;'></div>
+								<div style='clear:both;'></div>
+								<span class="">{{candidate.currentDesignation}}</span>
+								<span class="">{{candidate.workExperience}} Months</span>
+								<p></p>
+								<p>{{candidate.postalAddress}}</p>
+								<div class="job-tag">
+									<div class="pull-left">
+										<div class="meta-tag">
+											<span><a href="browse-categories.html"><i class="ti-brush"></i>{{candidate.PGCourse}}</a></span>
+											<div style='clear:both;'></div>
+											<span><a href="browse-categories.html"><i class="ti-brush"></i>{{candidate.PPGCourse}}</a></span>
+											<div style='clear:both;'></div>
+											<span><i class="ti-location-pin"></i>{{candidate.currentLocation}}</span>
+											<span>Rs. {{candidate.annualSalary}}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</div>
+

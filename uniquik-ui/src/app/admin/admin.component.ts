@@ -86,7 +86,10 @@ export class AdminComponent implements OnInit {
 	        this.appDataService.findMatchingCandidates(job).subscribe(
 	              data =>{
 	                this.matchedCandidates = JSON.parse(data.text());
+	                this.matchedCandidates = localStorage.setItem('matchedCandidates', data.text());
+	                this.router.navigateByUrl('candidateList');
 	                this.spinnerService.hide();
+	                
 
 	              } , error =>{
 	                    console.log(error);

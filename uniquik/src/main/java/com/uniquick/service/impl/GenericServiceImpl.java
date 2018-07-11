@@ -116,6 +116,30 @@ public class GenericServiceImpl implements GenericService {
 		
 		for (Candidate candidate : candidates) {
 			Integer matchedScore = 0;
+			
+			Integer totalWorkExp = 0 ;
+			if(candidate.getWorkExperience().contains("Month"))
+			{
+				String exp = candidate.getWorkExperience();
+    			exp = exp.toLowerCase().replace(" year(s) ", ":").replace(" month(s)", "");
+    			totalWorkExp = (Integer.parseInt(exp.split(":")[0].trim())) * 12;
+    			totalWorkExp = totalWorkExp + (Integer.parseInt(exp.split(":")[1].trim()));
+			}else {
+				totalWorkExp = Integer.parseInt(candidate.getWorkExperience()); 
+			}
+			
+			if((job.getJobMaxExp() * 12) >= totalWorkExp && (job.getJobMinExp() * 12) <= totalWorkExp ) {
+				matchedScore++;
+			} else{
+				continue;
+			}
+
+			if(job.getJobAnnualCompensation() >= candidate.getAnnualSalary() ) {
+				matchedScore++;
+			}else {
+				continue;
+			}
+
 			String jobLocationArr []= job.getJobLocation().split(",");
 			for (int i = 0; i < jobLocationArr.length; i++) {
 				if(candidate.getPreferredLocation().toLowerCase().contains(jobLocationArr[i].toLowerCase())){
@@ -124,24 +148,16 @@ public class GenericServiceImpl implements GenericService {
 				}
 			}
 			
-
 			String jobTags []= job.getJobTag().split(",");
 			for (int i = 0; i < jobTags.length; i++) {
-				if(candidate.getResumeTitle().toLowerCase().contains(jobTags[i]) || candidate.getCurrentDesignation().toLowerCase().contains(jobTags[i])){
+				if(candidate.getResumeTitle().toLowerCase().contains(jobTags[i]) 
+						|| candidate.getCurrentDesignation().toLowerCase().contains(jobTags[i])
+						|| candidate.getPGCourse().toLowerCase().contains(jobTags[i])
+						|| candidate.getPPGCourse().toLowerCase().contains(jobTags[i])){
 					matchedScore++;
 					break;
 				}
 			}
-			
-/*			String jobTags []=  obTag().split(",");
-			if(candidate.getWorkExperience().equals(anObject)ResumeTitle().toLowerCase().contains(jobTags[i]) || candidate.getCurrentDesignation().toLowerCase().contains(jobTags[i])){
-					matchedScore++;
-					break;
-				}
-			}
-*/
-			
-			
 			
 			if(matchedScore  > 0){
 				candidate.setMatchedScore(matchedScore);
@@ -160,4 +176,5 @@ public class GenericServiceImpl implements GenericService {
 	        return b.getMatchedScore().compareTo(a.getMatchedScore());
 	    }
 	}
+	
 }

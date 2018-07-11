@@ -116,7 +116,13 @@ public class ResourceController {
     			candidate.setMobileNo(getCellValue(row, 5));
     			candidate.setDateOfBirth(getDateFromString(getCellValue(row, 6).replaceAll("'", "")));
     			candidate.setEmail(getCellValue(row, 7));
-    			candidate.setWorkExperience(getCellValue(row, 8));
+    			
+    			String exp = getCellValue(row, 8);
+    			exp = exp.toLowerCase().replace(" year(s) ", ":").replace(" month(s)", "");
+    			Integer totalMonths = (Integer.parseInt(exp.split(":")[0].trim())) * 12;
+    			totalMonths = totalMonths+ (Integer.parseInt(exp.split(":")[1].trim()));
+    			
+    			candidate.setWorkExperience(totalMonths.toString());
     			candidate.setResumeTitle(getCellValue(row, 9));
     			candidate.setCurrentLocation(getCellValue(row, 10));
     			candidate.setPreferredLocation(getCellValue(row, 11));

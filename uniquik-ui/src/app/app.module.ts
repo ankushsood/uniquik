@@ -29,6 +29,7 @@ import { ImportCandidateDataComponent } from './importCandidates/importCandidate
 import { SlimScroll } from 'angular4-slimscroll';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { CandidateListComponent } from './candidateList/candidateList.component';
 
 export function authHttpServiceFactory(http: Http) {
 	console.log('aaaaaaaaaaaa');
@@ -52,9 +53,9 @@ export function authHttpServiceFactory(http: Http) {
 	EmployerSignupComponent,
 	CandidateSignupComponent,
 	ImportCandidateDataComponent,
-	PostJobComponent,
 	SlimScroll,
-	
+	PostJobComponent,
+	CandidateListComponent
   ],
   imports: [
     BrowserModule,
