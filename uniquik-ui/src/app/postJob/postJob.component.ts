@@ -6,7 +6,6 @@ import {AuthenticationService} from '../services/authentication.service';
 import {UserService} from '../services/user.service';
 import {AppDataService} from '../services/app-data.service';
 import {JwtHelper} from 'angular2-jwt';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'postJob',
@@ -41,8 +40,7 @@ private postJobForm: NgForm;
 				private activatedRoute: ActivatedRoute,
 				private authenticationService: AuthenticationService,
 				private userService: UserService,
-				private appDataService : AppDataService,
-				private spinnerService: Ng4LoadingSpinnerService) {
+				private appDataService : AppDataService) {
     this.redirectUrl = this.activatedRoute.snapshot.queryParams['redirectTo'];
   }
 
@@ -74,33 +72,10 @@ private postJobForm: NgForm;
   
   }
 
-  login() {
-    this.loading = true;
-
-    this.authenticationService.login(this.model.username, this.model.password)
-      .subscribe(
-        result => {
-          this.loading = false;
-
-          if (result) {
-            this.userService.login(result);
-            this.navigateAfterSuccess();
-          } else {
-            this.error = 'Username or password is incorrect';
-          }
-        },
-        error => {
-          this.error = 'Username or password is incorrect';
-          this.loading = false;
-        }
-      );
-  }
-
   public saveJob (){
 
 	let accessToken = localStorage.getItem('access_token');
 	let decodedToken = this.jwtHelper.decodeToken(accessToken);
-	this.spinnerService.show();
 
 	
 	let job = {
@@ -131,11 +106,9 @@ private postJobForm: NgForm;
           	}else{
             	this.router.navigate(['/user']);
             }
-			this.spinnerService.hide();
 
           } , error =>{
 				console.log(error);
-				this.spinnerService.hide();
 
           });;
 		

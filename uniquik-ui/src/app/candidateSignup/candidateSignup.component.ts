@@ -34,13 +34,13 @@ export class CandidateSignupComponent implements OnInit {
       .subscribe(
         result => {
           this.loading = false;
-
-          if (result) {
+              console.log(result);
+        /*  if (result) {
             this.userService.login(result);
             this.navigateAfterSuccess();
           } else {
             this.error = 'Username or password is incorrect';
-          }
+          }*/
         },
         error => {
           this.error = 'Username or password is incorrect';

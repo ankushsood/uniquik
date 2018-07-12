@@ -6,7 +6,6 @@ import { AuthenticationService } from '../services/authentication.service';
 import { UserService } from '../services/user.service';
 import { AppDataService } from '../services/app-data.service';
 import { JwtHelper } from 'angular2-jwt';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 import { UploadFileService } from '../services/fileUpload.service';
 import { HttpClient, HttpResponse, HttpEventType } from '@angular/common/http';

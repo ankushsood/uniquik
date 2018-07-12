@@ -5,7 +5,6 @@ import { NgForm } from '@angular/forms';
 import {AuthenticationService} from '../services/authentication.service';
 import {UserService} from '../services/user.service';
 import {AppDataService} from '../services/app-data.service';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'employerSignup',
@@ -33,8 +32,7 @@ private orgSignupForm: NgForm;
 				private activatedRoute: ActivatedRoute,
 				private authenticationService: AuthenticationService,
 				private userService: UserService,
-				private appDataService : AppDataService,
-				private spinnerService: Ng4LoadingSpinnerService) {
+				private appDataService : AppDataService) {
     this.redirectUrl = this.activatedRoute.snapshot.queryParams['redirectTo'];
   }
 
@@ -42,30 +40,8 @@ private orgSignupForm: NgForm;
     this.userService.logout();
   }
 
-  login() {
-    this.loading = true;
-
-    this.authenticationService.login(this.model.username, this.model.password)
-      .subscribe(
-        result => {
-          this.loading = false;
-
-          if (result) {
-            this.userService.login(result);
-            this.navigateAfterSuccess();
-          } else {
-            this.error = 'Username or password is incorrect';
-          }
-        },
-        error => {
-          this.error = 'Username or password is incorrect';
-          this.loading = false;
-        }
-      );
-  }
-
+  
   public saveOrgnazation (){
-	this.spinnerService.show();
 	  
 	let org = {
 		orgName : this.orgSignupForm.form.controls.orgName.value,
@@ -78,11 +54,9 @@ private orgSignupForm: NgForm;
 		  
 	  this.appDataService.saveOrganization(org).subscribe(
           data =>{
-        	this.spinnerService.hide();
 			this.navigateAfterSuccess();
           } , error =>{
 			console.log(error);
-        	this.spinnerService.hide();
 				  
           });;
 	  

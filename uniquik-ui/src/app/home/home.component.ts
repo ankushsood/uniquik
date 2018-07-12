@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import {AppDataService} from '../services/app-data.service';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -16,7 +15,6 @@ export class HomeComponent implements OnInit {
 
   constructor(private cdRef:ChangeDetectorRef,
           private appDataService: AppDataService,
-          private spinnerService: Ng4LoadingSpinnerService,
           private modalService: NgbModal) { 
     }
 	isLoggedIn : any = null;
@@ -39,16 +37,11 @@ export class HomeComponent implements OnInit {
                     'assets/img/clients/img6.png'
                   ];
 
-      this.spinnerService.show();       
       this.appDataService.getAllJobs().subscribe(
           data =>{
               this.jobs = data;
-              this.spinnerService.hide();         
-          
-          
           } , error =>{
               console.log(error);
-              this.spinnerService.hide();
               
       });;
       

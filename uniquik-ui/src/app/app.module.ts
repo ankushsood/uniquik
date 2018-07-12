@@ -24,12 +24,14 @@ import {AdminAuthGuard} from './guards/admin-auth-guard.service';
 import {TOKEN_NAME} from './services/auth.constant';
 import {AppDataService} from './services/app-data.service';
 import { HttpClientModule } from '@angular/common/http';
-import { Ng4LoadingSpinnerModule } from 'ng4-loading-spinner';
 import { ImportCandidateDataComponent } from './importCandidates/importCandidates.component';
 import { SlimScroll } from 'angular4-slimscroll';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { CandidateListComponent } from './candidateList/candidateList.component';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import { HttpResponseCustomInterceptor } from './http.response.custom.interceptor';
+import * as $ from 'jquery';
 
 export function authHttpServiceFactory(http: Http) {
 	console.log('aaaaaaaaaaaa');
@@ -64,7 +66,6 @@ export function authHttpServiceFactory(http: Http) {
 	HttpClientModule,
     AppRoutingModule,
 	SlideMenuModule,
-	Ng4LoadingSpinnerModule,
     NgbModalModule.forRoot(),
 
   ],
@@ -74,7 +75,12 @@ export function authHttpServiceFactory(http: Http) {
     UserService,
     AuthGuard,
     AdminAuthGuard,
-    AppDataService
+    AppDataService,
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: HttpResponseCustomInterceptor,
+        multi: true,
+      }
 
   ],
   bootstrap: [AppComponent]

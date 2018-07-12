@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 import {AuthenticationService} from '../services/authentication.service';
 import {UserService} from '../services/user.service';
@@ -19,8 +18,7 @@ export class LoginComponent implements OnInit {
   constructor(private router: Router,
 				private activatedRoute: ActivatedRoute,
 				private authenticationService: AuthenticationService,
-				private userService: UserService,
-				private spinnerService: Ng4LoadingSpinnerService) {
+				private userService: UserService) {
     this.redirectUrl = this.activatedRoute.snapshot.queryParams['redirectTo'];
 	
 	
@@ -34,31 +32,22 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.loading = true;
-	this.spinnerService.show();
 
     this.authenticationService.login(this.model.username, this.model.password)
-      .subscribe(
-        result => {
-          this.loading = false;
-			console.log(result)
-          if (result) {
-            this.userService.login(result);
-            this.navigateAfterSuccess();
-			this.spinnerService.hide();
+    .subscribe(
+            result =>{
+                this.loading = false;
+              if (result) {
+                this.userService.login(result);
+                this.navigateAfterSuccess();
 
-          } else {
-            this.error = 'Username or password is incorrect';
-          }
-			this.spinnerService.hide();
-
-        },
-        error => {
-			this.error = 'Username or password is incorrect';
-			this.loading = false;
-			this.spinnerService.hide();
-
-        }
-      );
+              } else {
+                this.error = 'Username or password is incorrect';
+              }
+            } , error =>{
+                this.error = 'Username or password is incorrect';
+                this.loading = false;                    
+            });;
   }
 
   private navigateAfterSuccess() {

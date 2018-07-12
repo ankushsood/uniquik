@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {JwtHelper} from 'angular2-jwt';
 import {AppDataService} from '../services/app-data.service';
 import {Router, ActivatedRoute} from '@angular/router';
-import { Ng4LoadingSpinnerService } from 'ng4-loading-spinner';
 
 @Component({
   selector: 'app-admin',
@@ -20,14 +19,12 @@ export class AdminComponent implements OnInit {
 	selectedOrg : any;
   constructor(private appDataService: AppDataService,
 				private router: Router,
-				private activatedRoute: ActivatedRoute,
-				private spinnerService: Ng4LoadingSpinnerService) {
+				private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
     let accessToken = localStorage.getItem('access_token');
 	let decodedToken = this.jwtHelper.decodeToken(accessToken);
-	this.spinnerService.show();
 	this.loggedInUser = {firstName : ''};
 	this.appDataService.getUsers().subscribe(
 		userData =>{
@@ -35,25 +32,19 @@ export class AdminComponent implements OnInit {
 			this.loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
 			this.isLoaded = true;
 
-			this.spinnerService.hide();
-
 		} , error =>{
 			console.log(error);
-			this.spinnerService.hide();
 			
 		});
   }
 	
 	onEmployerChange(orgName){
 		console.log(orgName);
-		this.spinnerService.show();		
 		this.appDataService.getJobs(orgName).subscribe(
 			data =>{
 				this.jobs = JSON.parse(data.text());
-				this.spinnerService.hide();			
 			} , error =>{
 				console.log(error);
-				this.spinnerService.hide();
 				
 		});;
 
@@ -68,32 +59,26 @@ export class AdminComponent implements OnInit {
 	  }
 	  
 	  deleteJob(job){
-	    this.spinnerService.show();
 	    this.appDataService.deleteJob(job).subscribe(
 	          data =>{
 	            this.jobs = JSON.parse(data.text());
-	            this.spinnerService.hide();
 
 	          } , error =>{
 	                console.log(error);
-	                this.spinnerService.hide();
 
 	          });;
 	  }
 	  
 	  findMatchingCandidates(job){
-	        this.spinnerService.show();
 	        this.appDataService.findMatchingCandidates(job).subscribe(
 	              data =>{
 	                this.matchedCandidates = JSON.parse(data.text());
 	                this.matchedCandidates = localStorage.setItem('matchedCandidates', data.text());
 	                this.router.navigateByUrl('candidateList');
-	                this.spinnerService.hide();
 	                
 
 	              } , error =>{
 	                    console.log(error);
-	                    this.spinnerService.hide();
 
 	              });;
 	      

@@ -29,6 +29,98 @@
 		<link rel="icon" type="image/x-icon" href="favicon.ico">
 	</head>
     <body>
+        
+        
+	<style>
+	*:focus {
+    outline: none;
+}
+		.parentDisable {
+			position: fixed;
+			top: 0;
+			left: 0;
+			background: #fff;
+			opacity: 0.8;
+			z-index: 999999;
+			height: 100%;
+			width: 100%;
+			opacity: 0.8;
+			 pointer-events: none;
+			  -webkit-user-select: none;  /* Chrome all / Safari all */
+			  -moz-user-select: none;     /* Firefox all */
+			  -ms-user-select: none;      /* IE 10+ */
+			  user-select: none;   
+		}
+		
+		.spinner {
+			position: absolute !important;
+			width: 100%;
+			text-align: center;
+			top: 150px;
+			z-index: 1000000;
+		}
+		
+		.spinner>div {
+			width: 40px;
+			height: 40px;
+			background-color: blue;
+			border-radius: 100%;
+			display: inline-block;
+			-webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+			animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+		}
+		
+		.spinner .bounce1 {
+			-webkit-animation-delay: -0.48s;
+			animation-delay: -0.48s;
+			background-color: Yellow;
+		}
+		
+		.spinner .bounce2 {
+			-webkit-animation-delay: -0.32s;
+			animation-delay: -0.32s;
+			background-color: red;
+		}
+		
+		.spinner .bounce3 {
+			-webkit-animation-delay: -0.16s;
+			animation-delay: -0.16s;
+			background-color: black;
+		}	
+		
+		@-webkit-keyframes sk-bouncedelay {
+		  0%, 80%, 100% { -webkit-transform: scale(0) }
+		  40% { -webkit-transform: scale(1.0) }
+		}
+		
+		@keyframes sk-bouncedelay {
+		  0%, 80%, 100% { 
+		    -webkit-transform: scale(0);
+		    transform: scale(0);
+		  } 40% { 
+		    -webkit-transform: scale(1.0);
+		    transform: scale(1.0);
+		  }
+
+.ql-formats{
+    border: 1px solid !important;
+    margin: 2px !important;
+		}
+	</style>
+    <div>
+    <div class="parentDisable" style='display:none;'></div>
+	    
+	<div class="spinner" style='display:none;' >
+	  <div class="bounce1"></div>
+	  <div class="bounce2"></div>
+	  <div class="bounce3"></div>
+	  <div class="bounce4"></div>
+	</div>
+	</div>
+        
+        
+        
+        
         <app-root></app-root>
     </body>
 	
@@ -36,7 +128,6 @@
 	
 	    
     <!-- Main JS  -->
-    <script type="text/javascript" src="assets/js/jquery-min.js"></script>      
     <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>    
     <script type="text/javascript" src="assets/js/material.min.js"></script>
     <script type="text/javascript" src="assets/js/material-kit.js"></script>

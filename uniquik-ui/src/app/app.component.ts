@@ -1,5 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import { Event as RouterEvent, Router, NavigationStart,
+    NavigationEnd,
+    NavigationCancel,
+    NavigationError } from '@angular/router';
+import { PlatformLocation } from '@angular/common'
+
 import { ChangeDetectorRef } from '@angular/core';
 import {
     trigger,
@@ -9,6 +14,7 @@ import {
     transition
   } from '@angular/animations';
 import {UserService} from './services/user.service';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-root',
@@ -40,9 +46,12 @@ export class AppComponent  implements OnInit{
       let bool = this.isIn;
       this.isIn = bool === false ? true : false; 
   }
-  
+  loading: boolean = false;
   constructor(private router: Router, private userService: UserService, private cdRef:ChangeDetectorRef) {
-  
+
+      router.events.subscribe((event: RouterEvent) => {
+          this.navigationInterceptor(event)
+        })
   }
 	public config = {
 		animation: "collapse",
@@ -112,4 +121,29 @@ export class AppComponent  implements OnInit{
   isUser() : boolean{
     return this.userService.isUser();
   }
+  
+  
+
+  // Shows and hides the loading spinner during RouterEvent changes
+     navigationInterceptor(event: RouterEvent): void {
+       
+         if (event instanceof NavigationStart) {
+             window.scrollTo(0, 0);
+             $( '.spinner' ).show();
+             $( '.parentDisable' ).show();
+         }
+         if (event instanceof NavigationEnd) {
+             $( '.spinner' ).hide();
+             $( '.parentDisable' ).hide();
+         }
+
+         // Set loading state to false in both of the below events to hide the spinner in case a request fails
+         if (event instanceof NavigationCancel) {
+             this.loading = false
+         }
+         if (event instanceof NavigationError) {
+             $( '.spinner' ).hide();
+             $( '.parentDisable' ).hide();
+         }
+     }
 }
