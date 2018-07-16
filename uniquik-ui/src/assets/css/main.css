@@ -3521,3 +3521,18 @@ blockquote p a:hover {
 .close{
 	opacity : 1 !important;
 }
+
+
+.mydp{
+
+border: 0px solid #CCC !important;
+}
+
+form  input{
+	margin:0 !important;
+}
+
+#radioBtn .notActive{
+    color: #3276b1;
+    background-color: #fff;
+}

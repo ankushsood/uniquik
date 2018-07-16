@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {Http, HttpModule} from '@angular/http';
 import {AuthConfig, AuthHttp} from 'angular2-jwt';
-
+import { Select2Module } from 'ng2-select2';
 import {AppRoutingModule} from './app-routing.module';
 
 import {AppComponent} from './app.component';
@@ -32,9 +32,9 @@ import { CandidateListComponent } from './candidateList/candidateList.component'
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import { HttpResponseCustomInterceptor } from './http.response.custom.interceptor';
 import * as $ from 'jquery';
+import { MyDatePickerModule } from 'mydatepicker';
 
 export function authHttpServiceFactory(http: Http) {
-	console.log('aaaaaaaaaaaa');
   return new AuthHttp(new AuthConfig({
     headerPrefix: 'Bearer',
     tokenName: TOKEN_NAME,
@@ -67,7 +67,8 @@ export function authHttpServiceFactory(http: Http) {
     AppRoutingModule,
 	SlideMenuModule,
     NgbModalModule.forRoot(),
-
+    MyDatePickerModule,
+    Select2Module
   ],
   providers: [
     {provide: AuthHttp, useFactory: authHttpServiceFactory, deps: [Http]},

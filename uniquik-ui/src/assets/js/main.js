@@ -1,8 +1,3 @@
-// Page Loader
-$(window).load(function() {
-  "use strict";
-  $('#loading').fadeOut();
-});
 
 
 
@@ -48,3 +43,4 @@ $(document).ready(function(){
     $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height() );
   });
 });
+

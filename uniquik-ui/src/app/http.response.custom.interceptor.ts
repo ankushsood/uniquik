@@ -10,10 +10,6 @@ import * as $ from 'jquery';
 @Injectable()
 export class HttpResponseCustomInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-     
-      console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa');
-      
-      
       $( '.spinner' ).show();
       /*if(!req.url.endsWith('/login')){
           var currentUser = localStorage.getItem('currentUser');
