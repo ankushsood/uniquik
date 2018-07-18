@@ -3536,3 +3536,22 @@ form  input{
     color: #3276b1;
     background-color: #fff;
 }
+
+
+.modal{
+    margin-top: 25px !important;	
+}
+
+
+.modal-dialog{
+	height:0 !important;
+}
+
+
+.table-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #ddd;
+}

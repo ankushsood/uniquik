@@ -40,10 +40,35 @@ public class Job {
     private Long jobAnnualCompensation;
     @Column(name = "job_tag")
     private String jobTag;
+    @Column(name = "occupation")
+    private String occupation;	 
+    @Column(name = "business")
+    private String business;
+    @Column(name = "industry")
+    private String industry;
+    
     @Column(name = "job_closing_date")
     @JsonFormat(pattern="dd-MM-yyyy")
     private Date jobClosingDate;
     
+	public String getOccupation() {
+		return occupation;
+	}
+	public void setOccupation(String occupation) {
+		this.occupation = occupation;
+	}
+	public String getBusiness() {
+		return business;
+	}
+	public void setBusiness(String business) {
+		this.business = business;
+	}
+	public String getIndustry() {
+		return industry;
+	}
+	public void setIndustry(String industry) {
+		this.industry = industry;
+	}
 	public Long getId() {
 		return id;
 	}

@@ -1,3 +1,121 @@
+<ng-template #expContent let-c="close" let-d="dismiss">
+	<div class="modal-header">
+    	<h4  class="modal-title" id="modal-basic-title">Previous Organization Details
+	        <span class="pull-right" aria-label="Close" (click)="d('Cross click')">
+	    	  <span aria-hidden="true">&times;</span>
+		    </span>
+    	</h4>
+	</div>
+	<div class="modal-body">
+		<div class="form-group is-empty">
+			<label class="control-label" for="textarea">Company Name</label>
+			<input type="text" class="form-control" [(ngModel)]="previousEmployer.orgName" placeholder="Company Name">
+			<span class="material-input"></span>
+		</div>
+		<div class="form-group is-empty">
+			<label class="control-label" for="textarea">Department</label>
+			<input type="text" class="form-control" [(ngModel)]="previousEmployer.department"  placeholder="Department">
+			<span class="material-input"></span>
+		</div>
+		<div class="form-group is-empty">
+			<span style="font-size: 14px;color: #888;font-weight: 700;margin-bottom: 15px;">Industry</span>
+			<select2 ngDefaultControl    name="industries"  [data]="industries" data-width="100%" [options]="catOptions"  [(ngModel)]="previousEmployer.industry" (valueChanged)="previousEmployer.industry = $event.value"></select2>
+			<span class="material-input"></span>
+		</div>
+		<div class="form-group is-empty">
+			<label class="control-label" for="textarea">Number of Employee</label>
+			<input type="text" class="form-control" placeholder="" [(ngModel)]="previousEmployer.noOfEmps" >
+			<span class="material-input"></span>
+		</div>
+		<div class="form-group is-empty">
+			<label class="control-label" for="textarea">Business Detail</label>
+			<input type="text" class="form-control" placeholder=""  [(ngModel)]="previousEmployer.businessDetail" >
+			<span class="material-input"></span>
+		</div>
+		<div class="form-group is-empty">
+			<label class="control-label" for="textarea">Basic Monthly Salary</label>
+			<input type="text" class="form-control" placeholder=""  [(ngModel)]="previousEmployer.basicMonthlySalary" >
+			<span class="material-input"></span>
+		</div>
+		<div class="form-group is-empty">
+			<label class="control-label" for="textarea">Annual Salary including Bonus &amp; Allowance</label>
+			<input type="text" class="form-control" placeholder=""  [(ngModel)]="previousEmployer.annualSalary" >
+			<span class="material-input"></span>
+		</div>
+		<div class="form-group is-empty">
+			<label class="control-label" for="textarea">Employment Type</label>
+			<select class="form-control" name="entryEmpType3" id="entryEmpType3"  [(ngModel)]="previousEmployer.employmentType" >
+				<option value="">Please select-----</option>
+				<option value="1">Regular Employee</option>
+				<option value="2">Contract Employee</option>
+				<option value="3">Temporary Worker</option>
+				<option value="4">Part-time Job</option>
+				<option value="5">IC</option>
+			</select>
+			<span class="material-input"></span>
+		</div>
+		<div class="form-group is-empty">
+			<label class="control-label" for="textarea">Designation</label>
+			<input type="text" class="form-control" placeholder=""  [(ngModel)]="previousEmployer.designation" >
+			<span class="material-input"></span>
+		</div>
+		<div class="form-group is-empty">
+			<label class="control-label" for="textarea">Period</label>
+			<my-date-picker name="mydate" class="form-control" [(ngModel)]="previousEmployer.periodFrom" [options]="myDatePickerOptions"  placeholder="From" required style='height:45px !important;padding : 3px 10px !important;'></my-date-picker>
+			<br/><my-date-picker name="mydate" class="form-control" [(ngModel)]="previousEmployer.periodTo" [options]="myDatePickerOptions"  placeholder="From" required style='height:45px !important;padding : 3px 10px !important;'></my-date-picker>
+			<span class="material-input"></span>
+		</div>
+		<div class="form-group is-empty">
+			<label class="control-label" for="textarea">Job Description</label>
+			<input type="text" class="form-control" placeholder=""  [(ngModel)]="previousEmployer.jobDescription" >
+			<span class="material-input"></span>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<span class="btn btn-danger"
+			(click)="closePreviousEmployerModal();c('Close click')">Add</span>
+					<span class="btn btn-default"
+			(click)="c('Close click')">Close</span>
+	</div>
+</ng-template>
+
+
+<ng-template #qualificationContent let-c="close" let-d="dismiss">
+	<div class="modal-header">
+    	<h4  class="modal-title" id="modal-basic-title">Qualification
+	        <span class="pull-right" aria-label="Close" (click)="d('Cross click')">
+	    	  <span aria-hidden="true">&times;</span>
+		    </span>
+    	</h4>
+	</div>
+
+	<div class="modal-body">
+		<div class="form-group is-empty">
+			<label class="control-label" for="textarea">Program Title</label>
+			<input type="text" class="form-control" placeholder="" [(ngModel)]="qualification.programTitle">
+			<span class="material-input"></span>
+		</div>
+		
+		<div class="form-group is-empty">
+			<label class="control-label" for="textarea">From</label>
+			<my-date-picker name="mydate" class="form-control" [(ngModel)]="qualification.programFrom" [options]="myDatePickerOptions"  placeholder="From" required style='height:45px !important;padding : 3px 10px !important;'></my-date-picker>
+			<span class="material-input"></span>
+		</div>
+
+		<div class="form-group is-empty">
+			<label class="control-label" for="textarea">To</label>
+			<my-date-picker name="mydate" class="form-control" [(ngModel)]="qualification.programTo" [options]="myDatePickerOptions"  placeholder="From" required style='height:45px !important;padding : 3px 10px !important;'></my-date-picker>
+			<span class="material-input"></span>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<span class="btn btn-danger"
+			(click)="closeQualificationModal();c('Close click')">Add</span>
+					<span class="btn btn-danger"
+			(click)="c('Close click')">Close</span>
+	</div>
+</ng-template>
+
 <div style="height: 100% !import;   margin: 0;   padding: 0;top:180px;background-color:#fff;overflow-y:auto;overflow-x:hidden;margin-bottom:30px;">
     <div style='margin-top:70px'>
 
@@ -9,26 +127,26 @@
                             <div class="post-header">
                                 <p>Already have an account? <a  routerLink="/login" >Click here to login</a></p>
                             </div>
-                            <form class="form-ad">
+                            <form class="form-ad" #postCandidate="ngForm">
 								<div class="divider"><h3>Profile</h3></div>
 								<div class="form-group is-empty">
 									<label class="control-label" for="textarea">Name</label>
-									<input type="text" class="form-control" placeholder="Name">
+									<input name="cName" type="text" class="form-control" placeholder="Name" [(ngModel)]="model.candidateName">
 									<span class="material-input"></span>
 								</div>
 								
 								<div class="form-group is-empty">
 									<label class="control-label" for="textarea">Date of Birth</label>
-									<my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions"  required style='height:45px !important;padding : 3px 10px !important;'></my-date-picker>
+									<my-date-picker name="mydate" class="form-control" [(ngModel)]="model.dob" [options]="dDatePickerOptions"  placeholder="DOB" required style='height:45px !important;padding : 3px 10px !important;'></my-date-picker>
 									<span class="material-input"></span>
 								</div>
 								
 								<div class="form-group is-empty">
-									<label class="control-label" for="input">Sex</label>
+									<label class="control-label" for="input">Gender</label>
 									<div class="form-check">
-									  <input type="radio"  class="form-check-input" id="materialUnchecked" name="materialExampleRadios">
+									  <input type="radio"   value="male" class="form-check-input" id="materialUnchecked" name="materialExampleRadios" [(ngModel)]="model.gender">
 									  <label style="top: -18px;position:relative;padding: 10px;" class="form-check-label" for="materialUnchecked">Male</label>
-									  <input type="radio" class="form-check-input" id="materialUnchecked" name="materialExampleRadios">
+									  <input type="radio"  value="female" class="form-check-input" id="materialUnchecked" name="materialExampleRadios" [(ngModel)]="model.gender">
 									  <label style="top:-18px;position:relative;padding:10px;" class="form-check-label" for="materialUnchecked">Female</label>									  
 									</div>
 									<span class="material-input"></span>
@@ -36,217 +154,236 @@
 
 								<div class="form-group is-empty">
 									<label class="control-label" for="textarea">Nationality</label>
-									<select name="entryNATIONALITY_ID" class="form-control" id="entryNATIONALITY_ID">
+									<select name="entryNATIONALITY_ID" class="form-control" id="entryNATIONALITY_ID" [(ngModel)]="model.nationality">
 									   <option value="">Please select-----</option>
-									   <option value="1">Japan</option>
-									   <option value="2">China</option>
-									   <option value="3">Korea</option>
-									   <option value="4">Malaysia</option>
-									   <option value="5">Indonesia</option>
-									   <option value="6">Thailand</option>
-									   <option value="7">Vietnam</option>
-									   <option value="8">Taiwan</option>
-									   <option value="9">Hong Kong</option>
-									   <option value="10">Singapore</option>
-									   <option value="11">India</option>
-									   <option value="12">Philippines</option>
-									   <option value="13">U.S.A.</option>
-									   <option value="14">Canada</option>
-									   <option value="15">United Kingdom</option>
-									   <option value="16">France</option>
-									   <option value="17">Spain</option>
-									   <option value="18">Italy</option>
-									   <option value="19">Germany</option>
-									   <option value="20">Russia</option>
-									   <option value="21">Mexico</option>
-									   <option value="22">Brazil</option>
-									   <option value="23">Bangladesh</option>
-									   <option value="24">Switzerland</option>
-									   <option value="25">Argentina</option>
-									   <option value="26">Mongolia</option>
-									   <option value="27">Myanmar</option>
-									   <option value="28">Australia</option>
-									   <option value="29">Pakistan</option>
-									   <option value="30">Czech Republic</option>
-									   <option value="99">other</option>
+									   <option value="Japan">Japan</option>
+									   <option value="China">China</option>
+									   <option value="Korea">Korea</option>
+									   <option value="Malaysia">Malaysia</option>
+									   <option value="Indonesia">Indonesia</option>
+									   <option value="Thailand">Thailand</option>
+									   <option value="Vietnam">Vietnam</option>
+									   <option value="Taiwan">Taiwan</option>
+									   <option value="Hong Kong">Hong Kong</option>
+									   <option value="Singapore">Singapore</option>
+									   <option value="India">India</option>
+									   <option value="Philippines">Philippines</option>
+									   <option value="U.S.A.">U.S.A.</option>
+									   <option value="Canada">Canada</option>
+									   <option value="United Kingdom">United Kingdom</option>
+									   <option value="France">France</option>
+									   <option value="Spain">Spain</option>
+									   <option value="Italy">Italy</option>
+									   <option value="Germany">Germany</option>
+									   <option value="Russia">Russia</option>
+									   <option value="Mexico">Mexico</option>
+									   <option value="Brazil">Brazil</option>
+									   <option value="Bangladesh">Bangladesh</option>
+									   <option value="Switzerland">Switzerland</option>
+									   <option value="Argentina">Argentina</option>
+									   <option value="Mongolia">Mongolia</option>
+									   <option value="Myanmar">Myanmar</option>
+									   <option value="Australia">Australia</option>
+									   <option value="Czech Republic">Czech Republic</option>
+									   <option value="other">other</option>
 									</select>
 									<span class="material-input"></span>
 								</div>
-
 								<div class="form-group is-empty">
 									<label class="control-label" for="textarea">Address</label> 
-									<input type="text" class="form-control" style="width: 100%"	maxlength="200"> 
+									<input  name="address1"  type="text" class="form-control" style="width: 100%"	maxlength="200" [(ngModel)]="model.postalAddress"> 
 									<br/>
-									<input type="text" class="form-control" style="width: 100%" maxlength="200">
+									<input  name="address2" type="text" class="form-control" style="width: 100%" maxlength="200" [(ngModel)]="model.address">
 									<br/>
 									<label class="control-label" for="textarea">State</label> 
-									<select class="form-control" name="entryPref" id="entryPref">
-										<option value="">Please select-----</option>
-										<option value="40">Andaman and Nicobar Islands</option>
-										<option value="1">Andhra Pradesh</option>
-										<option value="2">Arunachal Pradesh</option>
-										<option value="3">Assam</option>
-										<option value="4">Bihar</option>
-										<option value="5">Chandigarh</option>
-										<option value="41">Chhattisgarh</option>
-										<option value="42">Dadra and Nagar Haveli</option>
-										<option value="30">Daman and Diu</option>
-										<option value="43">Delhi</option>
-										<option value="6">Goa</option>
-										<option value="7">Gujarat</option>
-										<option value="8">Haryana</option>
-										<option value="9">Himachal Pradesh</option>
-										<option value="10">Jammu and Kashmir</option>
-										<option value="11">Jharkhand</option>
-										<option value="12">Karnataka</option>
-										<option value="13">Kerala</option>
-										<option value="44">Lakshadweep</option>
-										<option value="14">Madhya Pradesh</option>
-										<option value="16">Maharashtra</option>
-										<option value="15">Manipur</option>
-										<option value="17">Meghalaya</option>
-										<option value="18">Mizoram</option>
-										<option value="19">Nagaland</option>
-										<option value="20">Orissa</option>
-										<option value="45">Puducherry</option>
-										<option value="21">Punjab</option>
-										<option value="22">Rajasthan</option>
-										<option value="23">Sikkim</option>
-										<option value="24">Tamil Nadu</option>
-										<option value="25">Tripura</option>
-										<option value="26">Uttar Pradesh</option>
-										<option value="27">Uttarakhand</option>
-										<option value="28">Paschim Banga/West Bengal</option>
-										<option value="46">Kolkata</option>
-										<option value="47">Hyderabad</option>
-										<option value="29">Chandigarh</option>
-										<option value="32">Mumbai</option>
-										<option value="48">Ahmedabad</option>
-										<option value="49">Chandigarh</option>
-										<option value="33">Bengaluru</option>
-										<option value="34">Chennai</option>
-										<option value="50">Chandigarh</option>
-										<option value="51">Guwahati</option>
-										<option value="52">Noida</option>
-										<option value="35">Gurgaon</option>
-										<option value="36">Pune</option>
-										<option value="53">Varodara</option>
-										<option value="54">Jamshedpur</option>
-										<option value="55">Nagpur</option>
-										<option value="56">Cohin</option>
-										<option value="70">Japan</option>
-										<option value="71">Hongkong</option>
-										<option value="72">China</option>
-										<option value="73">USA</option>
-										<option value="74">Middle east</option>
-										<option value="75">Thailand</option>
-										<option value="76">Singapore</option>
-										<option value="81">Tada(Sri City)</option>
-										<option value="82">Faridabad</option>
-										<option value="83">Manesar</option>
-										<option value="84">Bawal</option>
-										<option value="85">Tapukhera</option>
-										<option value="86">Rohtak</option>
-										<option value="87">Ranchi</option>
-										<option value="88">Mysore</option>
-										<option value="89">Jalandhar</option>
-										<option value="90">Ludhiana</option>
-										<option value="91">Jaipur</option>
-										<option value="92">Neemrana</option>
-										<option value="93">Greater Noida</option>
-										<option value="94">Ghaziabad</option>
-										<option value="95">Lucknow</option>
-										<option value="97">Anywhere</option>
-										<option value="98">Foreign</option>
-										<option value="99">Others</option>
-									</select>
+									<select2 name="entryPref" id="entryPref" [data]="location" data-width="100%" [(ngModel)]="model.state" ngDefaultControl  (valueChanged)="model.state = $event.value">
+									</select2>
 									<br/>
 									<label class="control-label" for="textarea">Zip Code</label> 
-									<input type="text" class="form-control" maxlength="11"> 
+									<input  name="zipCode" type="text" class="form-control" maxlength="11" [(ngModel)]="model.zip"> 
 									<span class="material-input"></span>
 								</div>
-
 								<div class="form-group is-empty">
 									<label class="control-label" for="textarea">Phone Number</label>
-									<input type="text" class="form-control" placeholder="Phone Number">
+									<input  name="phone" type="text" class="form-control" placeholder="Phone Number" [(ngModel)]="model.phone">
 									<span class="material-input"></span>
 								</div>
-
 								<div class="form-group is-empty">
 									<label class="control-label" for="textarea">E-Mail</label>
-									<input type="text" class="form-control" placeholder="E-Mail">
+									<input  name="email"  type="text" class="form-control" placeholder="E-Mail" [(ngModel)]="model.email">
 									<span class="material-input"></span>
 								</div>
-								
 								<div class="divider"><h3>History</h3></div>
-								
 								<div class="form-group is-empty">
-									<label class="control-label" for="textarea">Educational Qualification</label>
-									<select class="form-control" name="entryGrad" id="entryGrad">
-									         <option value="">Please select-----</option>
-									         <option value="1">Graduate School</option>
-									         <option value="2">University</option>
-									         <option value="3">Junior College</option>
-									         <option value="4">Technical College</option>
-									         <option value="5">College</option>
-									         <option value="6">High School</option>
-									         <option value="7">Junior High School</option>
-									         <option value="9">Others</option>
-									  </select>
-									  <span class="material-input"></span>
+									<span style="font-size: 14px;color: #888;font-weight: 700;margin-bottom: 15px;">Experienced Occupation</span>
+									<select2 name="expOcc"  [data]="expCategories" data-width="100%"  [(ngModel)]="model.expOccupation" ngDefaultControl  (valueChanged)="model.expOccupation= $event.value">
+									</select2>
 								</div>
-
-								<div class="form-group is-empty">
-									<label class="control-label" for="textarea">School/University Name</label>
-									<input type="text" class="form-control" placeholder="University">
-									<span class="material-input"></span>
-								</div>
-								
-								<div class="form-group is-empty">
-									<label class="control-label" for="textarea">Major</label>
-									<input type="text" class="form-control" placeholder="Major Qualification">
-									<span class="material-input"></span>
-								</div>
-								
-								<div class="form-group is-empty">
-									<label class="control-label" for="textarea">Term/Period</label>
-									<my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions"  placeholder="From" required style='height:45px !important;padding : 3px 10px !important;'></my-date-picker>
-									<br/>
-									<my-date-picker name="mydate" class="form-control" [options]="myDatePickerOptions"  placeholder="TO" required style='height:45px !important;padding : 3px 10px !important;'></my-date-picker>
-									<span class="material-input"></span>
-								</div>
-								
-								<div class="form-group is-empty">
-									<label class="control-label" for="textarea">Number of Companies Worked</label>
-									<input type="text" class="form-control" placeholder="Companies">
-									<span class="material-input"></span>
-								</div>
-								
 								<div class="form-group is-empty">
 									<label class="control-label" for="input">Work Status </label>
 									<div class="form-check">
-									  <input type="radio" class="form-check-input" id="materialUnchecked" name="materialExampleRadios">
+									  <input type="radio" value="employed" class="form-check-input" id="materialUnchecked" name="materialExampleRadios1" [(ngModel)]="model.isEmployed" >
 									  <label style="top: -18px;position:relative;padding: 10px;" class="form-check-label" for="materialUnchecked">Employed</label>
-									  <input type="radio" class="form-check-input" id="materialUnchecked" name="materialExampleRadios">
+									  <input type="radio" value="unemployed" class="form-check-input" id="materialUnchecked" name="materialExampleRadios1"  [(ngModel)]="model.isEmployed" >
 									  <label  style="top: -18px;position:relative;padding: 10px;" class="form-check-label" for="materialUnchecked">Unemployed</label>									  
 									</div>
 									<span class="material-input"></span>
 								</div>
-								
-								<div class="form-group">
-									<label>Standard Subjects</label>
-									<select2  [data]="expCategories" data-width="100%" [options]="catOptions"  ></select2>
+								<div  _ngcontent-c9="" class="card mb-3" style='overflow: auto !important;'>
+									<div _ngcontent-c9="" class="card-header">
+										<span style="font-size: 14px;color: #888;font-weight: 700;margin-bottom: 15px;">Experienced Occupation</span>
+										<span class="btn btn-sm btn-danger float-right" (click)="open(expContent)"><i class="fa fa-fw fa-plus"></i>Add</span>
+									</div>
+									<div _ngcontent-c9="" class="card-block table-responsive">
+										<table _ngcontent-c9="" class="table">
+											<thead _ngcontent-c9="" class="ng-tns-c9-1">
+												<tr _ngcontent-c9="" class="ng-tns-c9-1">
+													<th _ngcontent-c9="" class="ng-tns-c9-1">Organization Name</th>
+													<th _ngcontent-c9="" class="ng-tns-c9-1">From</th>
+													<th _ngcontent-c9="" class="ng-tns-c9-1">To</th>
+													<th _ngcontent-c9="" class="ng-tns-c9-1"></th>
+												</tr>
+											</thead>
+											<tbody _ngcontent-c9="" class="ng-tns-c9-1">
+												<tr *ngFor="let row of previousOrgDetails;let i=index"
+													_ngcontent-c9="" class="ng-tns-c9-1">
+													<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.orgName}}</td>
+													<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.periodFrom.formatted}}</td>
+													<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.periodTo.formatted}}</td>
+													<td _ngcontent-c9="" class="ng-tns-c9-1"><i class="fa fa-fw fa-trash"></i></td>
+												</tr>
+												<tr *ngIf="previousOrgDetails.length == 0">
+													<td colspan ="4">No Previous Employer Details added</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
 								</div>
-																
-								
-								
-								
-								
+								Attached File<br>
+						      	&nbsp;&nbsp;&nbsp;- Word, Excel, PowerPoint, PDF,Html,Text file is able to upload.<br>
+						      	<!-- &nbsp;&nbsp;&nbsp;- Volume of each file must be under 500KB. -->
+						      	&nbsp;&nbsp;&nbsp;- Volume of each file must be under 1MB. 
+      							<div class="form-group is-empty">
+									<label class="control-label" for="textarea">Resume</label>
+									<input  name="cv" type="file" class="form-control" placeholder="Name" [(ngModel)]="model.resume">
+									<span class="material-input"></span>
+								</div>
 								<div class="divider"><h3>Qualification/Language Skill</h3></div>
 								
-								<div class="divider"><h3>Desire/Others</h3></div>
-
-
+								<div  _ngcontent-c9="" class="card mb-3" style='overflow: auto !important;'>
+									<div _ngcontent-c9="" class="card-header">
+										<span style="font-size: 14px;color: #888;font-weight: 700;margin-bottom: 10px;">Qualification</span> 
+										<span class="btn btn-sm btn-danger float-right" (click)="open(qualificationContent)"><i class="fa fa-fw fa-plus"></i>Add</span>
+									</div>
+									<div _ngcontent-c9="" class="card-block table-responsive">
+										<table _ngcontent-c9="" class="table">
+											<thead _ngcontent-c9="" class="ng-tns-c9-1">
+												<tr _ngcontent-c9="" class="ng-tns-c9-1">
+													<th _ngcontent-c9="" class="ng-tns-c9-1">Program Title</th>
+													<th _ngcontent-c9="" class="ng-tns-c9-1">From</th>
+													<th _ngcontent-c9="" class="ng-tns-c9-1">To</th>
+													<th _ngcontent-c9="" class="ng-tns-c9-1"></th>
+												</tr>
+											</thead>
+											<tbody _ngcontent-c9="" class="ng-tns-c9-1">
+												<tr *ngFor="let row of qualificationDetails;let i=index"
+													_ngcontent-c9="" class="ng-tns-c9-1">
+													<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.programTitle}}</td>
+													<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.programFrom.formatted}}</td>
+													<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.programTo.formatted}}</td>
+													<td _ngcontent-c9="" class="ng-tns-c9-1"><i class="fa fa-fw fa-trash"></i></td>
+												</tr>
+												<tr *ngIf="qualificationDetails.length == 0">
+													<td colspan ="4">No Qualification Details added</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="form-group is-empty">
+									<label class="control-label" for="textarea">English Skill</label>
+							      <br class="narrow">
+							      Conversation
+							      <select name="entryEngTalk" id="entryEngTalk" [(ngModel)]="model.engConversation">
+							         <option value="">-----</option>
+							         <option value="1">Low</option>
+							         <option value="2">Mid</option>
+							         <option value="3">High</option>
+							      </select>
+							      &nbsp;&nbsp;&nbsp;
+							      Reading
+							      <select name="entryEngRead" id="entryEngRead" [(ngModel)]="model.englishReading">
+							         <option value="">-----</option>
+							         <option value="1">Low</option>
+							         <option value="2">Mid</option>
+							         <option value="3">High</option>
+							      </select>
+							      &nbsp;&nbsp;&nbsp;
+							      Writing
+							      <select name="entryEngWrite" id="entryEngWrite" [(ngModel)]="model.engWriting">
+							         <option value="">-----</option>
+							         <option value="1">Low</option>
+							         <option value="2">Mid</option>
+							         <option value="3">High</option>
+							      </select>
+							      <br><br class="narrow">
+							      TOEIC&nbsp;<input type="text" [(ngModel)]="model.toeic" size="4" style="height:25px;ime-mode:disabled;" name="entryToeic" id="entryToeic" value="" maxlength="4">&nbsp;
+							      &nbsp;&nbsp;&nbsp;
+							      TOEFL&nbsp;<input type="text" [(ngModel)]="model.toefl" size="4" style="height:25px;ime-mode:disabled;" name="entryToefl" id="entryToefl" value="" maxlength="4">&nbsp;
+							      </div>
+								<div class="form-group is-empty">
+									<label class="control-label" for="textarea">Japanese Skill</label>
+							      	<br class="narrow">
+							      	Conversation
+									<select name="entryJpnTalk" id="entryJpnTalk" [(ngModel)]="model.japTalking">
+									   <option value="">-----</option>
+									   <option value="1">Low</option>
+									   <option value="2">Mid</option>
+									   <option value="3">High</option>
+									</select>
+									&nbsp;&nbsp;&nbsp;
+									Reading
+									<select name="entryJpnRead" id="entryJpnRead" [(ngModel)]="model.japReading">
+									   <option value="">-----</option>
+									   <option value="1">Low</option>
+									   <option value="2">Mid</option>
+									   <option value="3">High</option>
+									</select>
+									&nbsp;&nbsp;&nbsp;
+									Writing
+									<select name="entryJpnWrite" id="entryJpnWrite" [(ngModel)]="model.japWriting">
+									   <option value="">-----</option>
+									   <option value="1">Low</option>
+									   <option value="2">Mid</option>
+									   <option value="3">High</option>
+									</select>
+									&nbsp;&nbsp;&nbsp;
+									JLPT
+									<select name="entryJLPT" id="entryJLPT" [(ngModel)]="model.jlpt">
+									   <option value="">-----</option>
+									   <option value="1">Level1</option>
+									   <option value="2">Level2</option>
+									   <option value="3">Level3</option>
+									   <option value="4">Level4</option>
+									</select>
+								</div>
+								<div class="divider"><h3>Job Preferences</h3></div>
+								<div class="form-group is-empty">
+									<span style="font-size: 14px;color: #888;font-weight: 700;margin-bottom: 15px;">Preferred Industry</span>
+									<select2   name="expOcc"  [data]="industries" data-width="100%" [options]="catOptions"  [(ngModel)]="model.preferredIndustry" ngDefaultControl  (valueChanged)="model.preferredIndustry = $event.value"></select2>
+									<span class="material-input"></span>
+								</div>
+								<div class="form-group is-empty">
+									<span style="font-size: 14px;color: #888;font-weight: 700;margin-bottom: 15px;">Preferred  Occupation</span>
+									<select2   name="expOcc"  [data]="expCategories" data-width="100%" [options]="catOptions"  [(ngModel)]="model.preferredOccupation" ngDefaultControl  (valueChanged)="model.preferredOccupation = $event.value"></select2>
+								</div>
+								<div class="form-group is-empty">
+									<label class="control-label" for="textarea">Preferred Location</label> 
+									<select2 name="prefLoc" [(ngModel)]="model.preferredLocation" [data]="location" data-width="100%" [options]="catOptions"  ngDefaultControl  (valueChanged)="model.preferredOccupation = $event.value">
+									</select2>
+									<span class="material-input"></span>
+								</div>
+								<div class="btn btn-md btn-danger" (click)="saveCandidate()">Register Candidate</div>
          					</form>
                         </div>
 					</div>

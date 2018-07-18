@@ -17,7 +17,7 @@
 		<h2 class="section-title">Latest Job Openings</h2>
 	<div class="container" ><!-- container-fluid text-center bg-grey -->
 		<div slimScroll allowPageScroll="true" width="auto" height="250px" size="7px" class="row" >
-			<div  *ngFor="let job of jobs; index as i;"
+			<div  (click)="open(content)" *ngFor="let job of jobs; index as i;"
 				class="col-md-12 job-list">
 				<div class="job-list-content">
 					<h4>
@@ -38,10 +38,10 @@
 
 			</div>
 
-			<div (click)="open(content)" *ngFor="let job of jobs; index as i;"
+			<div  *ngFor="let job of jobs; index as i;"
 				class="col-md-12 job-list">
-				<div class="job-list-content">
-					<h4>
+				<div  class="job-list-content">
+					<h4 (click)="open(content)">
 						<span>{{job.jobTitle}}</span> <span
 							style="font-size: 12px; padding-right: 15px;" class="pull-right">{{job.jobMinExp}}-{{job.jobMaxExp}}
 							years</span>

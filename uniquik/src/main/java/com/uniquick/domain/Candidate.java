@@ -84,7 +84,12 @@ public class Candidate {
     @Column(name = "timestamp_5")
     private String timestamp5;
     
-
+    @Column(name = "employment_details")
+    private String employmentDetailsJSON;
+    @Column(name = "qualification_details")
+    private String qualificationDetailsJSON;
+    
+    
     @Transient
     private Integer matchedScore;
     
