@@ -137,7 +137,7 @@
 								
 								<div class="form-group is-empty">
 									<label class="control-label" for="textarea">Date of Birth</label>
-									<my-date-picker name="mydate" class="form-control" [(ngModel)]="model.dob" [options]="dDatePickerOptions"  placeholder="DOB" required style='height:45px !important;padding : 3px 10px !important;'></my-date-picker>
+									<my-date-picker name="mydate" class="form-control" [(ngModel)]="model.dob" [options]="dobDatePickerOptions"  placeholder="dd-mm-yyyy" required style='height:45px !important;padding : 3px 10px !important;'></my-date-picker>
 									<span class="material-input"></span>
 								</div>
 								
@@ -191,12 +191,12 @@
 								</div>
 								<div class="form-group is-empty">
 									<label class="control-label" for="textarea">Address</label> 
-									<input  name="address1"  type="text" class="form-control" style="width: 100%"	maxlength="200" [(ngModel)]="model.postalAddress"> 
+									<input  name="address1"  type="text" class="form-control" style="width: 100%"	maxlength="200" [(ngModel)]="model.address1"> 
 									<br/>
-									<input  name="address2" type="text" class="form-control" style="width: 100%" maxlength="200" [(ngModel)]="model.address">
+									<input  name="address2" type="text" class="form-control" style="width: 100%" maxlength="200" [(ngModel)]="model.address2">
 									<br/>
-									<label class="control-label" for="textarea">State</label> 
-									<select2 name="entryPref" id="entryPref" [data]="location" data-width="100%" [(ngModel)]="model.state" ngDefaultControl  (valueChanged)="model.state = $event.value">
+									<label class="control-label" for="textarea">State/City</label> 
+									<select2 name="entryPref" id="entryPref" [data]="location" data-width="100%" [(ngModel)]="model.currentLocation" ngDefaultControl  (valueChanged)="model.state = $event.value">
 									</select2>
 									<br/>
 									<label class="control-label" for="textarea">Zip Code</label> 
@@ -205,7 +205,7 @@
 								</div>
 								<div class="form-group is-empty">
 									<label class="control-label" for="textarea">Phone Number</label>
-									<input  name="phone" type="text" class="form-control" placeholder="Phone Number" [(ngModel)]="model.phone">
+									<input  name="phone" type="text" class="form-control" placeholder="Phone Number" [(ngModel)]="model.mobileNo">
 									<span class="material-input"></span>
 								</div>
 								<div class="form-group is-empty">
@@ -231,7 +231,7 @@
 								</div>
 								<div  _ngcontent-c9="" class="card mb-3" style='overflow: auto !important;'>
 									<div _ngcontent-c9="" class="card-header">
-										<span style="font-size: 14px;color: #888;font-weight: 700;margin-bottom: 15px;">Experienced Occupation</span>
+										<span style="font-size: 14px;color: #888;font-weight: 700;margin-bottom: 15px;">Employment History</span>
 										<span class="btn btn-sm btn-danger float-right" (click)="open(expContent)"><i class="fa fa-fw fa-plus"></i>Add</span>
 									</div>
 									<div _ngcontent-c9="" class="card-block table-responsive">
@@ -248,8 +248,8 @@
 												<tr *ngFor="let row of previousOrgDetails;let i=index"
 													_ngcontent-c9="" class="ng-tns-c9-1">
 													<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.orgName}}</td>
-													<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.periodFrom.formatted}}</td>
-													<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.periodTo.formatted}}</td>
+													<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.periodFrom}}</td>
+													<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.periodTo}}</td>
 													<td _ngcontent-c9="" class="ng-tns-c9-1"><i class="fa fa-fw fa-trash"></i></td>
 												</tr>
 												<tr *ngIf="previousOrgDetails.length == 0">
@@ -289,8 +289,8 @@
 												<tr *ngFor="let row of qualificationDetails;let i=index"
 													_ngcontent-c9="" class="ng-tns-c9-1">
 													<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.programTitle}}</td>
-													<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.programFrom.formatted}}</td>
-													<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.programTo.formatted}}</td>
+													<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.programFrom}}</td>
+													<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.programTo}}</td>
 													<td _ngcontent-c9="" class="ng-tns-c9-1"><i class="fa fa-fw fa-trash"></i></td>
 												</tr>
 												<tr *ngIf="qualificationDetails.length == 0">
@@ -370,16 +370,16 @@
 								<div class="divider"><h3>Job Preferences</h3></div>
 								<div class="form-group is-empty">
 									<span style="font-size: 14px;color: #888;font-weight: 700;margin-bottom: 15px;">Preferred Industry</span>
-									<select2   name="expOcc"  [data]="industries" data-width="100%" [options]="catOptions"  [(ngModel)]="model.preferredIndustry" ngDefaultControl  (valueChanged)="model.preferredIndustry = $event.value"></select2>
+									<select2   name="expOcc"  [data]="industries" data-width="100%" [options]="catOptions"  [(ngModel)]="model.prefIndustry" ngDefaultControl  (valueChanged)="model.prefIndustry = $event.value"></select2>
 									<span class="material-input"></span>
 								</div>
 								<div class="form-group is-empty">
 									<span style="font-size: 14px;color: #888;font-weight: 700;margin-bottom: 15px;">Preferred  Occupation</span>
-									<select2   name="expOcc"  [data]="expCategories" data-width="100%" [options]="catOptions"  [(ngModel)]="model.preferredOccupation" ngDefaultControl  (valueChanged)="model.preferredOccupation = $event.value"></select2>
+									<select2   name="expOcc"  [data]="expCategories" data-width="100%" [options]="catOptions"  [(ngModel)]="model.prefOccupation" ngDefaultControl  (valueChanged)="model.prefOccupation = $event.value"></select2>
 								</div>
 								<div class="form-group is-empty">
 									<label class="control-label" for="textarea">Preferred Location</label> 
-									<select2 name="prefLoc" [(ngModel)]="model.preferredLocation" [data]="location" data-width="100%" [options]="catOptions"  ngDefaultControl  (valueChanged)="model.preferredOccupation = $event.value">
+									<select2 name="prefLoc" [(ngModel)]="model.prefLocation" [data]="location" data-width="100%" [options]="catOptions"  ngDefaultControl  (valueChanged)="model.prefLocation = $event.value">
 									</select2>
 									<span class="material-input"></span>
 								</div>

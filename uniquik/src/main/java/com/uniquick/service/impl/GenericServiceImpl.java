@@ -176,5 +176,14 @@ public class GenericServiceImpl implements GenericService {
 	        return b.getMatchedScore().compareTo(a.getMatchedScore());
 	    }
 	}
+
+	@Override
+	public Candidate saveCandidate(Candidate candidate) {
+		return candidateRepository.save(candidate);
+	}
 	
+	@Override
+	public Candidate getCandidateById(long id) {
+		return candidateRepository.findOne(id);
+	}
 }

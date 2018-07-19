@@ -35,9 +35,13 @@ public interface GenericService {
     
     Job getJobById(long id);
     
+    Candidate getCandidateById(long id);
+    
     Iterable<Candidate> saveCandidates(List<Candidate> candidates);
     
     List<Candidate> findbyEmail(Set<String> candidates);
     
     List<Candidate> findMatchingCandidates(Job job);
+    
+    Candidate saveCandidate(Candidate candidate);
 }

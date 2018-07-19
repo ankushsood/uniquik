@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "candidate")
 public class Candidate {
@@ -27,6 +29,7 @@ public class Candidate {
     private String telephoneNo;
     @Column(name = "mobile_no")
     private String mobileNo;
+    @JsonFormat(pattern="dd-MM-yyyy")
     @Column(name = "date_of_birth")
     private Date dateOfBirth;
     @Column(name = "email")
@@ -83,14 +86,168 @@ public class Candidate {
     private String subuser5;
     @Column(name = "timestamp_5")
     private String timestamp5;
-    
     @Column(name = "employment_details")
     private String employmentDetailsJSON;
     @Column(name = "qualification_details")
     private String qualificationDetailsJSON;
-    
-    
+    @Column(name = "gender")
+    private String gender;
+    @Column(name="nationality")
+    private String nationality;
+    @Column(name = "zip")
+    private String zip;
+    @Column(name = "expOccupation")
+    private String expOccupation;
+    @Column(name = "is_employed")
+    private String isEmployed;
+    @Column(name = "resume_path")
+    private String resumePath;
     @Transient
+    private String resume;
+    @Column(name = "preferred_Industry")
+    private String preferredIndustry;
+    @Column(name = "preferred_Occupation")
+    private String preferredOccupation;
+    @Column(name = "eng_Conversation")
+    private String engConversation;
+    @Column(name = "english_Reading")
+    private String englishReading;
+    @Column(name = "eng_Writing")
+    private String engWriting;
+    @Column(name = "jap_Talking")
+    private String japTalking;
+    @Column(name = "jap_Reading")
+    private String japReading;
+    @Column(name = "jap_Writing")
+    private String japWriting;
+    @Column(name = "jlpt")
+    private String jlpt;
+    @Column(name = "toeic")
+    private String toeic;
+    @Column(name = "toefl")
+    private String toefl;
+    
+    public String getEmploymentDetailsJSON() {
+		return employmentDetailsJSON;
+	}
+	public void setEmploymentDetailsJSON(String employmentDetailsJSON) {
+		this.employmentDetailsJSON = employmentDetailsJSON;
+	}
+	public String getQualificationDetailsJSON() {
+		return qualificationDetailsJSON;
+	}
+	public void setQualificationDetailsJSON(String qualificationDetailsJSON) {
+		this.qualificationDetailsJSON = qualificationDetailsJSON;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	public String getNationality() {
+		return nationality;
+	}
+	public void setNationality(String nationality) {
+		this.nationality = nationality;
+	}
+	public String getZip() {
+		return zip;
+	}
+	public void setZip(String zip) {
+		this.zip = zip;
+	}
+	public String getExpOccupation() {
+		return expOccupation;
+	}
+	public void setExpOccupation(String expOccupation) {
+		this.expOccupation = expOccupation;
+	}
+	public String getIsEmployed() {
+		return isEmployed;
+	}
+	public void setIsEmployed(String isEmployed) {
+		this.isEmployed = isEmployed;
+	}
+	public String getResumePath() {
+		return resumePath;
+	}
+	public void setResumePath(String resumePath) {
+		this.resumePath = resumePath;
+	}
+	public String getResume() {
+		return resume;
+	}
+	public void setResume(String resume) {
+		this.resume = resume;
+	}
+	public String getPreferredIndustry() {
+		return preferredIndustry;
+	}
+	public void setPreferredIndustry(String preferredIndustry) {
+		this.preferredIndustry = preferredIndustry;
+	}
+	public String getPreferredOccupation() {
+		return preferredOccupation;
+	}
+	public void setPreferredOccupation(String preferredOccupation) {
+		this.preferredOccupation = preferredOccupation;
+	}
+	public String getEngConversation() {
+		return engConversation;
+	}
+	public void setEngConversation(String engConversation) {
+		this.engConversation = engConversation;
+	}
+	public String getEnglishReading() {
+		return englishReading;
+	}
+	public void setEnglishReading(String englishReading) {
+		this.englishReading = englishReading;
+	}
+	public String getEngWriting() {
+		return engWriting;
+	}
+	public void setEngWriting(String engWriting) {
+		this.engWriting = engWriting;
+	}
+	public String getJapTalking() {
+		return japTalking;
+	}
+	public void setJapTalking(String japTalking) {
+		this.japTalking = japTalking;
+	}
+	public String getJapReading() {
+		return japReading;
+	}
+	public void setJapReading(String japReading) {
+		this.japReading = japReading;
+	}
+	public String getJapWriting() {
+		return japWriting;
+	}
+	public void setJapWriting(String japWriting) {
+		this.japWriting = japWriting;
+	}
+	public String getJlpt() {
+		return jlpt;
+	}
+	public void setJlpt(String jlpt) {
+		this.jlpt = jlpt;
+	}
+	public String getToeic() {
+		return toeic;
+	}
+	public void setToeic(String toeic) {
+		this.toeic = toeic;
+	}
+	public String getToefl() {
+		return toefl;
+	}
+	public void setToefl(String toefl) {
+		this.toefl = toefl;
+	}
+	@Transient
     private Integer matchedScore;
     
 	public Integer getMatchedScore() {

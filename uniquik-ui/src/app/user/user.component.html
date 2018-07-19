@@ -3,49 +3,72 @@
 	<div class="row">
 		<div class='col-md-12' style='margin-bottom:50px;'>
 			<h4>
-				<a routerLink="/postJob" class="btn btn-common">Post New Job</a>
-
+				Hello {{loggedInUser.firstName}}, <br/>
 			</h4>
 			<div class="clearfix"></div>
+				<br/>
+			<fieldset class="scheduler-border">
+			    <legend class="scheduler-border">Search Job</legend>
+			    <div class="control-group">
+			        <label class="control-label input-label" for="startTime">Industry :</label>
+			        <div class="controls bootstrap-timepicker">
+						<select2 ngDefaultControl    name="industries"  [data]="industries" data-width="100%" [(ngModel)]="searchIndustry" (valueChanged)="searchIndustry = $event.value"></select2>
+			            <i class="icon-time"></i>
+			        </div>
+			    </div>
+				<br/>
+			    <div class="control-group">
+			        <label class="control-label input-label" for="startTime">Occupation :</label>
+			        <div class="controls bootstrap-timepicker">
+						<select2 ngDefaultControl    name="expCategories"  [data]="expCategories" data-width="100%" [(ngModel)]="searchOccupation" (valueChanged)="searchOccupation = $event.value"></select2>
+			            <i class="icon-time"></i>
+			        </div>
+			    </div>
+				<br/>			    
+			    <div class="control-group">
+			        <label class="control-label input-label" for="startTime">Location :</label>
+			        <div class="controls bootstrap-timepicker">
+						<select2 ngDefaultControl    name="searchlocation"  [data]="location" data-width="100%"  [(ngModel)]="searchLocation" (valueChanged)="searchLocation = $event.value"></select2>
+			            <i class="icon-time"></i>
+			        </div>
+			    </div>
+			    <br/>
+				<div class="btn btn-sm btn-danger pull-right" (click)="findJob()">Register Candidate</div>
+
+			</fieldset>
+
+
 
 			<!-- Start Purchase Section -->
 			
 			<section class="find-job section">
-			  <div class="">
-				<h2 class="section-title">Hello {{loggedInUser.firstName}}, Your Job Post:</h2>
-				  <div  *ngFor="let job of jobs; index as i;" class="col-md-12 job-list">
-					<div   class="">
-					  <div class="job-list-content">
-						<h4><span>{{job.jobTitle}}</span></h4>
-						<div style='clear:both;'></div>
-							<span class="">{{job.jobDesignation}}</span>
-							<div style='clear:both;'></div>
-							<span class="">{{job.jobEmploymentType}}</span>
-							<div style='clear:both;'></div>
-							<span class="">{{job.jobMinExp}}-{{job.jobMaxExp}} years</span>
-							<p></p>
-						<p>{{job.jobDescription}}</p>
-						<div class="job-tag">
-						  <div class="pull-left">
-							<div class="meta-tag">
-							  <span><a href="browse-categories.html"><i class="ti-brush"></i>{{job.jobTag}}</a></span>
-							<div style='clear:both;'></div>
-							  <span><i class="ti-location-pin"></i>{{job.jobLocation}}</span>
-							  <span>Rs. {{job.jobAnnualCompensation}}</span>
+			  	<h4>
+					Matching Jobs based on your profile: <br/>
+				</h4>
+				  
+				<div slimScroll allowPageScroll="true" width="auto" height="250px" size="7px" class="row" >
+					<div  (click)="open(content)" *ngFor="let job of jobs; index as i;" class="col-md-12 job-list">
+						<div class="job-list-content">
+							<h4>
+								<span>{{job.jobTitle}}</span> 
+								<span style="font-size: 12px; padding-right: 15px;" class="pull-right">{{job.jobMinExp}}-{{job.jobMaxExp}}	years</span>
+							</h4>
+							<div class="job-tag">
+								<div class="pull-left">
+									<div class="meta-tag">
+										<div style='clear: both;'></div>
+										<span><i class="ti-location-pin"></i>{{job.jobLocation}}</span>
+										<span><span>Rs.</span>{{job.jobAnnualCompensation}}</span>
+									</div>
+								</div>
 							</div>
-						  </div>
-						  
 						</div>
-						<div class='clearfix'></div>
-						<div style='margin-top:10px'>
-						<span (click) = "editJob(job)" class="part-time">Edit</span>
-						<span (click) = "deleteJob(job)" class="full-time">Delete</span>
-						</div>
-					  </div>
 					</div>
-				  </div>
+					<div *ngIf="jobs.length == 0"  class="col-md-12 job-list">
+						<span colspan ="4">No Matching Jobs Found!</span>
+					</div>
 			  </div>
-		</section>
+			</section>
+		</div>
 	</div>
-</div>
 </div>

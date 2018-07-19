@@ -19,6 +19,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.uniquick.domain.Candidate;
 import com.uniquick.domain.Job;
 import com.uniquick.domain.RandomCity;
+import com.uniquick.domain.Role;
 import com.uniquick.domain.User;
 import com.uniquick.service.GenericService;
 
@@ -212,6 +214,8 @@ public class ResourceController {
     	}
     	return candidateList;
     }
+   
+
     
     @RequestMapping(value ="/deleteJob", method={RequestMethod.POST},consumes={"application/json" },produces={"application/json" })
     @PreAuthorize("hasAuthority('STANDARD_USER')")

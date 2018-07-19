@@ -47,6 +47,14 @@ export class AppDataService {
 		});
 	}
 	
+    searchJobs(searchIndustry, searchOccupation, searchLocation) {
+        return this.http.get('/springjwt/findJobs/' + searchIndustry + "/" + searchOccupation + "/" + searchLocation)
+          .map((response) => {
+            return response;
+        });
+    }
+
+    
 	saveOrganization(formData){
 		console.log(formData)
 		let headers = new HttpHeaders({'Content-Type': 'application/json'});
@@ -54,7 +62,27 @@ export class AppDataService {
 			headers : headers
 		});
 	}
-	
+	registerCandidate(formData){
+        let data : any = {};
+        data = formData;
+        formData.dateOfBirth = formData.dob.formatted;
+        
+        formData.postalAddress = formData.address1 + ' ' + formData.address2;
+        formData.preferredIndustry = formData.prefIndustry.join(',');
+        formData.preferredOccupation = formData.prefOccupation.join(',');
+        formData.preferredLocation = formData.prefLocation.join(',');
+
+        data.dob = {};
+        data.prefIndustry = null;
+        data.prefIndustry = null;
+        data.prefLocation = null;
+        
+        console.log(data)
+        let headers = new HttpHeaders({'Content-Type': 'application/json'});
+        return this.openHttp.post('/open/registerCandidate',  JSON.stringify(formData), {
+            headers : headers
+        });
+    }
 	saveJob(formData){
 		console.log(formData)
 		let headers = new HttpHeaders({'Content-Type': 'application/json'});
@@ -82,4 +110,6 @@ export class AppDataService {
         return this.http.post('/springjwt/findMatchingCandidates',  JSON.stringify(formData), {
         });
     }
+    
+    
 }
