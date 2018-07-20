@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
     items: Array<any> = []
     jobs : any = [];
     jwtHelper: JwtHelper = new JwtHelper();
-    
+    model : any = {};
 
   constructor(private cdRef:ChangeDetectorRef,
           private appDataService: AppDataService,
@@ -57,11 +57,9 @@ export class HomeComponent implements OnInit {
   closeResult: string;
 
   
-  open(content) {
+  open(job, content) {
       
-      
-      console.log('opening... Modal Box')
-      
+      this.model.selectedJob = job;
       
       this.modalService.open(content).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
