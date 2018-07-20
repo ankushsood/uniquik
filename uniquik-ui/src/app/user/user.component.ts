@@ -73,7 +73,6 @@ export class UserComponent implements OnInit {
   open(job, content) {
       
       this.model.selectedJob = job;
-      
       this.modalService.open(content).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
       }, (reason) => {

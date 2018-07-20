@@ -51,6 +51,8 @@ export class HomeComponent implements OnInit {
 
   ngAfterViewChecked() { 
     // Avoid the error: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked
+    this.isLoggedIn =  localStorage.getItem('isAdmin');
+      
 	this.cdRef.detectChanges();
 	
 	
