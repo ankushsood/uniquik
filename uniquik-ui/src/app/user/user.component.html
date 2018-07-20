@@ -47,7 +47,7 @@
 				</h4>
 				  
 				<div slimScroll allowPageScroll="true" width="auto" height="250px" size="7px" class="row" >
-					<div  (click)="open(content)" *ngFor="let job of searchedJobs; index as i;" class="col-md-12 job-list">
+					<div  (click)="open(job, content)" *ngFor="let job of searchedJobs; index as i;" class="col-md-12 job-list">
 						<div class="job-list-content">
 							<h4>
 								<span>{{job.jobTitle}}</span> 
@@ -73,13 +73,9 @@
 	</div>
 </div>
 
-
-
-
 <ng-template #content let-c="close" let-d="dismiss">
 	<div class="modal-header">
     	<h4 class="modal-title" id="modal-basic-title">
-    		Job Details
 	        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
 	    	  <span aria-hidden="true">&times;</span>
 		    </button>
@@ -87,14 +83,48 @@
   	</div>
   	<div class="modal-body" >
     	<div style='overflow:auto !important;max-height:300px !important;'>
-      		<div class="form-group">
-        		<label for="dateOfBirth">Date of birth</label>
-        		<div class="input-group">
-          			<div class="input-group-append">
-        	
-          			</div>
-        		</div>
-      		</div>
+      		<div _ngcontent-c9="" class="card-block table-responsive">
+				<table _ngcontent-c9="" class="table">
+					<tbody _ngcontent-c9="" class="ng-tns-c9-1">
+						<tr _ngcontent-c9="" class="ng-tns-c9-1">
+							<td _ngcontent-c9="" class="ng-tns-c9-1">Occupation</td>
+							<td _ngcontent-c9="" class="ng-tns-c9-1">{{model.selectedJob.jobOccupation}}</td>
+						</tr>
+						<tr _ngcontent-c9="" class="ng-tns-c9-1">
+							<td _ngcontent-c9="" class="ng-tns-c9-1">Business</td>
+							<td _ngcontent-c9="" class="ng-tns-c9-1">{{model.selectedJob.jobBusiness}}</td>
+						</tr>
+						<tr _ngcontent-c9="" class="ng-tns-c9-1">
+							<td _ngcontent-c9="" class="ng-tns-c9-1">Industry</td>
+							<td _ngcontent-c9="" class="ng-tns-c9-1">{{model.selectedJob.jobIndustry}}</td>
+						</tr>
+						<tr _ngcontent-c9="" class="ng-tns-c9-1">
+							<td _ngcontent-c9="" class="ng-tns-c9-1">Job Description</td>
+							<td _ngcontent-c9="" class="ng-tns-c9-1">{{model.selectedJob.jobDescription}}</td>
+						</tr>
+						<tr _ngcontent-c9="" class="ng-tns-c9-1">
+							<td _ngcontent-c9="" class="ng-tns-c9-1">Required Experience</td>
+							<td _ngcontent-c9="" class="ng-tns-c9-1">{{model.selectedJob.jobRequiredExp}}</td>
+						</tr>
+						<tr _ngcontent-c9="" class="ng-tns-c9-1">
+							<td _ngcontent-c9="" class="ng-tns-c9-1">Years of Experience</td>
+							<td _ngcontent-c9="" class="ng-tns-c9-1">{{model.selectedJob.jobMinExp}} - {{model.selectedJob.jobMaxExp}}</td>
+						</tr>
+						<tr _ngcontent-c9="" class="ng-tns-c9-1">
+							<td _ngcontent-c9="" class="ng-tns-c9-1">Salary</td>
+							<td _ngcontent-c9="" class="ng-tns-c9-1">{{model.selectedJob.jobAnnualCompensation}}</td>
+						</tr>
+						<tr _ngcontent-c9="" class="ng-tns-c9-1">
+							<td _ngcontent-c9="" class="ng-tns-c9-1">Benefits</td>
+							<td _ngcontent-c9="" class="ng-tns-c9-1">{{model.selectedJob.jobBenefits}}</td>
+						</tr>
+						<tr _ngcontent-c9="" class="ng-tns-c9-1">
+							<td colspan="2" _ngcontent-c9="" class="ng-tns-c9-1"><span (click)="applyJob()" class= "btn btn-common" >Apply</span></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+      		
     	</div>
   	</div>
 </ng-template>

@@ -67,21 +67,21 @@ export class UserComponent implements OnInit {
   
     closeResult: string;
 
+    model : any = {};
     
-    open(content) {
-        
-        
-        console.log('opening... Modal Box')
-        
-        
-        this.modalService.open(content).result.then((result) => {
-          this.closeResult = `Closed with: ${result}`;
-        }, (reason) => {
-          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        });
-      }
-
-      private getDismissReason(reason: any): string {
+  
+  open(job, content) {
+      
+      this.model.selectedJob = job;
+      
+      this.modalService.open(content).result.then((result) => {
+        this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+    
+    private getDismissReason(reason: any): string {
           
           console.log(reason);
         if (reason === ModalDismissReasons.ESC) {

@@ -40,7 +40,8 @@ export class HomeComponent implements OnInit {
 
           this.appDataService.findMatchingJobs(decodedToken.user_name).subscribe(
                   data =>{
-                      this.jobs = data;
+                      console.log(data.json())
+                      this.jobs = data.json();
                   } , error =>{
                       console.log(error);
                   });          
@@ -80,6 +81,9 @@ export class HomeComponent implements OnInit {
       }
     }
     
+    applyJob(){
+            
+    }
         
     fetchNextJobs(){
         

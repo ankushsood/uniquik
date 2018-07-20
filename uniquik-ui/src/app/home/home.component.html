@@ -37,13 +37,15 @@
 
 			</div>
 
-			
-
-			<div class="col-md-12">
-				<!-- <div class="showing pull-right">
-					<a (click)="fetchNextJobs()" href="#"><span>View More</span></a>
-				</div> -->
+			<div *ngIf="jobs != null && jobs.length== 0"  class="col-md-12 job-list">
+				<span colspan ="4">No Matching Jobs Found!</span>
 			</div>
+
+			<!-- <div class="col-md-12">
+				<div class="showing pull-right">
+					<a (click)="fetchNextJobs()" href="#"><span>View More</span></a>
+				</div>
+			</div> -->
 		</div>
 	</div>
 </section>
@@ -155,6 +157,9 @@
 						<tr _ngcontent-c9="" class="ng-tns-c9-1">
 							<td _ngcontent-c9="" class="ng-tns-c9-1">Benefits</td>
 							<td _ngcontent-c9="" class="ng-tns-c9-1">{{model.selectedJob.jobBenefits}}</td>
+						</tr>
+						<tr _ngcontent-c9="" class="ng-tns-c9-1">
+							<td colspan="2" _ngcontent-c9="" class="ng-tns-c9-1"><span (click)="applyJob()" class= "btn btn-common" >Apply</span></td>
 						</tr>
 					</tbody>
 				</table>
