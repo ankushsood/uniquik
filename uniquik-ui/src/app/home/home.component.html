@@ -1,11 +1,10 @@
-<section class=" purchase row" style='background-color:#333'>
+<section  *ngIf="isLoggedIn == null"  class=" purchase row" style='background-color:#333'>
 	<div style='padding: 15px;'>
 		<div class="">
 			<div class="section-content text-center">
-
 				<h1 class="title-text">LOOKING FOR A JOB!</h1>
 				<p>Join thousand of employers and earn what you deserve!</p>
-				<a *ngIf="isLoggedIn == null" routerLink="/candidateSignup"
+				<a routerLink="/candidateSignup"
 					class="btn btn-common">Get Started Now</a>
 			</div>
 		</div>

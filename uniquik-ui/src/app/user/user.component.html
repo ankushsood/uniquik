@@ -33,7 +33,7 @@
 			        </div>
 			    </div>
 			    <br/>
-				<div class="btn btn-sm btn-danger pull-right" (click)="findJob()">Register Candidate</div>
+				<div class="btn btn-sm btn-danger pull-right" (click)="findJob()">Search</div>
 
 			</fieldset>
 
@@ -47,7 +47,7 @@
 				</h4>
 				  
 				<div slimScroll allowPageScroll="true" width="auto" height="250px" size="7px" class="row" >
-					<div  (click)="open(content)" *ngFor="let job of jobs; index as i;" class="col-md-12 job-list">
+					<div  (click)="open(content)" *ngFor="let job of searchedJobs; index as i;" class="col-md-12 job-list">
 						<div class="job-list-content">
 							<h4>
 								<span>{{job.jobTitle}}</span> 
@@ -64,7 +64,7 @@
 							</div>
 						</div>
 					</div>
-					<div *ngIf="jobs.length == 0"  class="col-md-12 job-list">
+					<div *ngIf="searchedJobs!= null && searchedJobs.length== 0"  class="col-md-12 job-list">
 						<span colspan ="4">No Matching Jobs Found!</span>
 					</div>
 			  </div>
@@ -72,3 +72,29 @@
 		</div>
 	</div>
 </div>
+
+
+
+
+<ng-template #content let-c="close" let-d="dismiss">
+	<div class="modal-header">
+    	<h4 class="modal-title" id="modal-basic-title">
+    		Job Details
+	        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+	    	  <span aria-hidden="true">&times;</span>
+		    </button>
+    	</h4>
+  	</div>
+  	<div class="modal-body" >
+    	<div style='overflow:auto !important;max-height:300px !important;'>
+      		<div class="form-group">
+        		<label for="dateOfBirth">Date of birth</label>
+        		<div class="input-group">
+          			<div class="input-group-append">
+        	
+          			</div>
+        		</div>
+      		</div>
+    	</div>
+  	</div>
+</ng-template>

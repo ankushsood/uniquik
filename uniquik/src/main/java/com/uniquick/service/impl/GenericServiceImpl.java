@@ -3,11 +3,13 @@ package com.uniquick.service.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.uniquick.domain.Candidate;
 import com.uniquick.domain.Job;
@@ -185,5 +187,46 @@ public class GenericServiceImpl implements GenericService {
 	@Override
 	public Candidate getCandidateById(long id) {
 		return candidateRepository.findOne(id);
+	}
+	
+	@Override
+	public List<Job> searchJobs(String searchIndustry, String searchOccupation, String searchLocation) {
+		return jobRepository.searchJobs(searchOccupation, searchIndustry, searchLocation);
+	}
+	@Override
+	public Candidate getCandidateByEmail(String email) {
+		Set<String> emails = new HashSet<>();
+		emails.add(email);
+		return candidateRepository.findByEmail(emails).get(0);
+	}
+	
+	@Override
+	public List<Job> findCandidateMatchingJobs(Candidate candidate) {
+		List<Job> dbJobs = findAllJobs();
+		List<Job> matchedJobs = new ArrayList<>();
+		for (Job job : dbJobs) {
+			if(!StringUtils.isEmpty(candidate.getEmploymentDetailsJSON()) && candidate.getEmploymentDetailsJSON().contains(job.getJobIndustry()) ){
+				matchedJobs.add(job);
+				continue;
+			}
+			if(!StringUtils.isEmpty(candidate.getEmploymentDetailsJSON()) && candidate.getEmploymentDetailsJSON().contains(job.getJobOccupation()) ){
+				matchedJobs.add(job);
+				continue;
+			}
+			if(!StringUtils.isEmpty(job.getJobLocation()) ){
+				String loc [] = job.getJobLocation().split(",");
+				for (int i = 0; i < loc.length; i++) {
+					if(candidate.getPreferredLocation().contains(loc[i])){
+						matchedJobs.add(job);
+						break;
+					}
+				}
+				
+				continue;
+			}
+
+		}
+		
+		return matchedJobs;
 	}
 }

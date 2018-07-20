@@ -1,11 +1,13 @@
 package com.uniquick.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +49,32 @@ public class OpenController {
     public List<Job> getJobs(){
         return userService.findAllJobs();
     }
+
+    @RequestMapping(value ="/searchJobs/{searchIndustry}/{searchOccupation}/{searchLocation}",  method={RequestMethod.GET}, produces={"application/json" })
+    public List<Job> searchJobs(@PathVariable("searchIndustry") String searchIndustry,
+    		@PathVariable("searchOccupation") String searchOccupation,
+    		@PathVariable("searchLocation") String searchLocation){
+        List<Job> dbJobs = userService.findAllJobs();
+        List<Job> searchedJobs = new ArrayList<>();
+        
+        for (Job job : dbJobs) {
+			if(!StringUtils.isEmpty(job.getJobIndustry()) && job.getJobIndustry().contains(searchIndustry) ){
+				searchedJobs.add(job);
+				continue;
+			}
+			if(!StringUtils.isEmpty(job.getJobOccupation()) && job.getJobOccupation().contains(searchOccupation) ){
+				searchedJobs.add(job);
+				continue;
+			}
+			if(!StringUtils.isEmpty(job.getJobLocation()) && job.getJobLocation().contains(searchLocation) ){
+				searchedJobs.add(job);
+				continue;
+			}
+		}
+        
+        return searchedJobs;
+    }
+
     
     @RequestMapping(value ="/registerCandidate", method={RequestMethod.POST},consumes={"application/json" },produces={"application/json" })
     public Candidate registerCandidate( @RequestBody Candidate candidate){
@@ -125,4 +153,11 @@ public class OpenController {
         }
         return null;
     }
+
+    @RequestMapping(value ="/findMatchingJobs/{username:.+}",  method={RequestMethod.GET},consumes={"application/json" },produces={"application/json" })
+    public List<Job> getMatchingJobs(@PathVariable("username") String username ){
+        Candidate candidate = userService.getCandidateByEmail(username);
+        return userService.findCandidateMatchingJobs(candidate);
+    }
+
 }

@@ -25,6 +25,27 @@
 				   <input type="text" name="jobTitle" [(ngModel)]="jobTitle" class="form-control" />
 				   <span class="material-input" ></span>
 				</div>
+				<div class="form-group is-empty">
+				   <label class="control-label">Business</label>
+				   <input type="text" name="jobTitle" [(ngModel)]="jobBusiness" class="form-control" />
+				   <span class="material-input" ></span>
+				</div>
+				
+				<div class="form-group is-empty">
+				   <label class="control-label">Industry</label>
+				   <select2 ngDefaultControl    name="industries"  [data]="industries" data-width="100%" [(ngModel)]="jobIndustry" (valueChanged)="jobIndustry = $event.value"></select2>
+				   <span class="material-input" ></span>
+				</div>
+				
+				
+				<div class="form-group is-empty">
+				   <label class="control-label">Occupation</label>
+				   <select2 ngDefaultControl    name="industries"  [data]="expCategories" data-width="100%" [(ngModel)]="jobOccupation" (valueChanged)="jobOccupation = $event.value"></select2>
+				   <span class="material-input" ></span>
+				</div>
+				
+			    
+				
 				<div class="form-group">
 				   <label class="control-label">Description</label>
 					<textarea  name="jobDescription" [(ngModel)]="jobDescription" class="note-codable form-control"></textarea>
@@ -33,9 +54,8 @@
 				<div class="form-group is-empty">
 				   <label class="control-label">
 					  Location
-					  <span>(optional)</span>
 				   </label>
-				   <input type="text" name="jobLocation" [(ngModel)]="jobLocation" class="form-control" placeholder="e.g.London" />
+				   <select2 ngDefaultControl    name="industries"  [data]="location" [options]="catOptions" data-width="100%" [(ngModel)]="jobLocation" (valueChanged)="jobLocation = $event.value"></select2>
 				   <span class="material-input" ></span>
 				</div>
 
@@ -54,9 +74,19 @@
 				   <label class="control-label">
 					  Designation
 				   </label>
-				   <input type="text" class="form-control"  name="jobDesignation" [(ngModel)]="jobDesignation" placeholder="e.g.London" />
+				   <input type="text" class="form-control"  name="jobDesignation" [(ngModel)]="jobDesignation" placeholder="e.g.Team Lead" />
 				   <span class="material-input" ></span>
 				</div>
+
+				
+				<div class="form-group is-empty">
+				   <label class="control-label">
+					  Required Experience
+				   </label>
+				   <input type="text" class="form-control"  name="jobDesignation" [(ngModel)]="jobRequiredExp" placeholder="e.g.Team Lead" />
+				   <span class="material-input" ></span>
+				</div>
+
 
 				<div class="form-group is-empty">
 				   <label class="control-label">
@@ -75,8 +105,6 @@
 				   <input type="text" name="jobAnnualCompensation" [(ngModel)]="jobAnnualCompensation" class="form-control" placeholder="" />
 				   <span class="material-input" ></span>
 				</div>
-
-				
 				
 				<div class="form-group is-empty">
 				   <label class="control-label" for="textarea">
@@ -87,7 +115,17 @@
 				   <p class="note" style='text-align:left;'>Comma separate tags, such as required skills or technologies, for this job.</p>
 				   <span class="material-input" ></span>
 				</div>
+
 				
+				<div class="form-group is-empty">
+				   <label class="control-label" for="textarea">
+					  Benefits
+					  <span>(optional)</span>
+				   </label>
+				   <input type="text"  name="jobTag" [(ngModel)]="jobBenefits"  class="form-control"  />
+				   <span class="material-input" ></span>
+				</div>
+								
 				<div class="form-group is-empty">
 				   <label class="control-label">
 					  Closing Date

@@ -38,6 +38,13 @@ export class AppDataService {
 		});
 	}
 
+	findMatchingJobs(username) {
+        return this.http.get('/open/findMatchingJobs/' + username)
+            .map((response) => {
+                return response;
+            });
+    }
+
 	getAllJobs() {
         let headers = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -48,7 +55,10 @@ export class AppDataService {
 	}
 	
     searchJobs(searchIndustry, searchOccupation, searchLocation) {
-        return this.http.get('/springjwt/findJobs/' + searchIndustry + "/" + searchOccupation + "/" + searchLocation)
+        console.log(searchIndustry);
+        console.log(searchOccupation);
+        console.log(searchLocation);
+        return this.http.get('/open/searchJobs/' + searchIndustry + "/" + searchOccupation + "/" + searchLocation)
           .map((response) => {
             return response;
         });

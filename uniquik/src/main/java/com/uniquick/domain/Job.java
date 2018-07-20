@@ -41,34 +41,21 @@ public class Job {
     @Column(name = "job_tag")
     private String jobTag;
     @Column(name = "occupation")
-    private String occupation;	 
+    private String jobOccupation;	 
     @Column(name = "business")
-    private String business;
+    private String jobBusiness;
     @Column(name = "industry")
-    private String industry;
+    private String jobIndustry;
+    @Column(name = "job_required_exp")
+    private String jobRequiredExp;
+    @Column(name = "benefits")
+    private String jobBenefits;
     
     @Column(name = "job_closing_date")
     @JsonFormat(pattern="dd-MM-yyyy")
     private Date jobClosingDate;
     
-	public String getOccupation() {
-		return occupation;
-	}
-	public void setOccupation(String occupation) {
-		this.occupation = occupation;
-	}
-	public String getBusiness() {
-		return business;
-	}
-	public void setBusiness(String business) {
-		this.business = business;
-	}
-	public String getIndustry() {
-		return industry;
-	}
-	public void setIndustry(String industry) {
-		this.industry = industry;
-	}
+
 	public Long getId() {
 		return id;
 	}
@@ -147,4 +134,29 @@ public class Job {
 	public void setJobClosingDate(Date jobClosingDate) {
 		this.jobClosingDate = jobClosingDate;
 	}
+	public String getJobOccupation() {
+		return jobOccupation;
+	}
+	public void setJobOccupation(String jobOccupation) {
+		this.jobOccupation = jobOccupation;
+	}
+	public String getJobBusiness() {
+		return jobBusiness;
+	}
+	public void setJobBusiness(String jobBusiness) {
+		this.jobBusiness = jobBusiness;
+	}
+	public String getJobIndustry() {
+		return jobIndustry;
+	}
+	public void setJobIndustry(String jobIndustry) {
+		this.jobIndustry = jobIndustry;
+	}
+	public String getJobRequiredExp() {
+		return jobRequiredExp;
+	}
+	public void setJobRequiredExp(String jobRequiredExp) {
+		this.jobRequiredExp = jobRequiredExp;
+	}
+	
 }

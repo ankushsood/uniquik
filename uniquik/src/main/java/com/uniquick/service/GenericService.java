@@ -44,4 +44,11 @@ public interface GenericService {
     List<Candidate> findMatchingCandidates(Job job);
     
     Candidate saveCandidate(Candidate candidate);
+    
+    List<Job> searchJobs(String searchIndustry, String searchOccupation, String searchLocation);
+
+    Candidate getCandidateByEmail(String email);
+    
+    List<Job> findCandidateMatchingJobs(Candidate candidate);
+
 }

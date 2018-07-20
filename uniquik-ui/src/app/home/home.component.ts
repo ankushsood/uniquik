@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ChangeDetectorRef } from '@angular/core';
 import {AppDataService} from '../services/app-data.service';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import {JwtHelper} from 'angular2-jwt';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +12,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 export class HomeComponent implements OnInit {
     items: Array<any> = []
     jobs : any = [];
+    jwtHelper: JwtHelper = new JwtHelper();
     
 
   constructor(private cdRef:ChangeDetectorRef,
@@ -22,34 +24,32 @@ export class HomeComponent implements OnInit {
     
   
   ngOnInit() {
-      this.items = [
-                    'assets/img/clients/img1.png',
-                    'assets/img/clients/img2.png',
-                    'assets/img/clients/img3.png',
-                    'assets/img/clients/img4.png',
-                    'assets/img/clients/img5.png',
-                    'assets/img/clients/img6.png',
-                    'assets/img/clients/img1.png',
-                    'assets/img/clients/img2.png',
-                    'assets/img/clients/img3.png',
-                    'assets/img/clients/img4.png',
-                    'assets/img/clients/img5.png',
-                    'assets/img/clients/img6.png'
-                  ];
+      this.isLoggedIn =  localStorage.getItem('isAdmin');
+      if(this.isLoggedIn == null || this.isLoggedIn == 'true'){ 
+          this.appDataService.getAllJobs().subscribe(
+              data =>{
+                  this.jobs = data;
+              } , error =>{
+                  console.log(error);
+                  
+          });
+      }else{
+          let accessToken = localStorage.getItem('access_token');
+          let decodedToken = this.jwtHelper.decodeToken(accessToken);
+          let loggedInUser = {firstName : decodedToken.user_name};
 
-      this.appDataService.getAllJobs().subscribe(
-          data =>{
-              this.jobs = data;
-          } , error =>{
-              console.log(error);
-              
-      });;
+          this.appDataService.findMatchingJobs(decodedToken.user_name).subscribe(
+                  data =>{
+                      this.jobs = data;
+                  } , error =>{
+                      console.log(error);
+                  });          
+      }
       
   }
 
   ngAfterViewChecked() { 
     // Avoid the error: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked
-	this.isLoggedIn =  localStorage.getItem('isAdmin');
 	this.cdRef.detectChanges();
 	
 	

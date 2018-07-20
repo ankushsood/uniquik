@@ -6,6 +6,7 @@ import {AuthenticationService} from '../services/authentication.service';
 import {UserService} from '../services/user.service';
 import {AppDataService} from '../services/app-data.service';
 import {JwtHelper} from 'angular2-jwt';
+import {AppData } from '../app.data';
 
 @Component({
   selector: 'postJob',
@@ -18,13 +19,18 @@ export class PostJobComponent implements OnInit {
   loading = false;
   error = '';
   jwtHelper: JwtHelper = new JwtHelper();
+  location : any = AppData.location;
+  industries : any = AppData.industries;
+  expCategories : any = AppData.expCategories;
+  catOptions: Select2Options;
+  
   redirectUrl: string;
   jobs : any = [];
 	editJob : any;
 	jobEmail: string;
     jobTitle: string;
     jobDescription: string;
-    jobLocation: string;
+    jobLocation=  [];
     jobMinExp: string;
     jobMaxExp: string;
     jobDesignation: string;
@@ -32,8 +38,15 @@ export class PostJobComponent implements OnInit {
     jobAnnualCompensation: string;
     jobTag: string;
     jobClosingDate: string;
-
- 
+    jobIndustries: string;
+    //jobLocation:string;
+    jobCategory : string;
+    jobBenefits : string;
+    jobOccupation : string;
+    jobIndustry : string;
+    jobBusiness : string;
+      jobRequiredExp: string;
+  
 @ViewChild('postJob')
 private postJobForm: NgForm;
   constructor(private router: Router,
@@ -45,7 +58,9 @@ private postJobForm: NgForm;
   }
 
   ngOnInit(): void {
-	  this.editJob = localStorage.getItem('editJob');
+      this.catOptions = { multiple: true};
+      
+      this.editJob = localStorage.getItem('editJob');
 	  
 	  if(this.editJob != null && this.editJob != undefined){
 
@@ -84,14 +99,19 @@ private postJobForm: NgForm;
 		jobEmail : this.postJobForm.form.controls.jobEmail.value,
 		jobTitle: this.postJobForm.form.controls.jobTitle.value,
 		jobDescription: this.postJobForm.form.controls.jobDescription.value,
-		jobLocation : this.postJobForm.form.controls.jobLocation.value,
+		jobLocation : this.jobLocation.join(','),
 		jobMinExp : this.postJobForm.form.controls.jobMinExp.value,
 		jobMaxExp : this.postJobForm.form.controls.jobMaxExp.value,
 		jobDesignation : this.postJobForm.form.controls.jobDesignation.value,
 		jobEmploymentType : this.postJobForm.form.controls.jobEmploymentType.value,
 		jobAnnualCompensation : this.postJobForm.form.controls.jobAnnualCompensation.value,
 		jobTag : this.postJobForm.form.controls.jobTag.value,
-		jobClosingDate : this.postJobForm.form.controls.jobClosingDate.value
+		jobClosingDate : this.postJobForm.form.controls.jobClosingDate.value,
+		jobBenefits : this.jobBenefits,
+		jobIndustry : this.jobIndustry,
+		jobBusiness : this.jobBusiness,
+		jobOccupation : this.jobOccupation,
+		jobRequiredExp : this.jobRequiredExp
 		};
 
 	if(this.editJob != null && this.editJob != undefined){
