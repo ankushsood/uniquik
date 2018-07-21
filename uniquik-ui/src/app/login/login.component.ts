@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router, ActivatedRoute} from '@angular/router';
+import { ChangeDetectorRef } from '@angular/core';
 
 import {AuthenticationService} from '../services/authentication.service';
 import {UserService} from '../services/user.service';
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
   error = '';
   redirectUrl: string;
 
-  constructor(private router: Router,
+  constructor(private cdRef:ChangeDetectorRef,
+                private router: Router,
 				private activatedRoute: ActivatedRoute,
 				private authenticationService: AuthenticationService,
 				private userService: UserService) {
@@ -57,4 +59,14 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/']);
     }
   }
+  
+
+  ngAfterViewChecked() { 
+    // Avoid the error: ExpressionChangedAfterItHasBeenCheckedError: Expression has changed after it was checked
+      
+    this.cdRef.detectChanges();
+    
+    
+  }
+
 }

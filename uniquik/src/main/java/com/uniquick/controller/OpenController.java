@@ -45,37 +45,6 @@ public class OpenController {
     	return userService.saveOrganization(organization);
     }
 
-    @RequestMapping(value ="/findAllJobs",  method={RequestMethod.GET}, produces={"application/json" })
-    public List<Job> getJobs(){
-        return userService.findAllJobs();
-    }
-
-    @RequestMapping(value ="/searchJobs/{searchIndustry}/{searchOccupation}/{searchLocation}",  method={RequestMethod.GET}, produces={"application/json" })
-    public List<Job> searchJobs(@PathVariable("searchIndustry") String searchIndustry,
-    		@PathVariable("searchOccupation") String searchOccupation,
-    		@PathVariable("searchLocation") String searchLocation){
-        List<Job> dbJobs = userService.findAllJobs();
-        List<Job> searchedJobs = new ArrayList<>();
-        
-        for (Job job : dbJobs) {
-			if(!StringUtils.isEmpty(job.getJobIndustry()) && job.getJobIndustry().contains(searchIndustry) ){
-				searchedJobs.add(job);
-				continue;
-			}
-			if(!StringUtils.isEmpty(job.getJobOccupation()) && job.getJobOccupation().contains(searchOccupation) ){
-				searchedJobs.add(job);
-				continue;
-			}
-			if(!StringUtils.isEmpty(job.getJobLocation()) && job.getJobLocation().contains(searchLocation) ){
-				searchedJobs.add(job);
-				continue;
-			}
-		}
-        
-        return searchedJobs;
-    }
-
-    
     @RequestMapping(value ="/registerCandidate", method={RequestMethod.POST},consumes={"application/json" },produces={"application/json" })
     public Candidate registerCandidate( @RequestBody Candidate candidate){
         if(candidate.getId() != null){
@@ -154,10 +123,8 @@ public class OpenController {
         return null;
     }
 
-    @RequestMapping(value ="/findMatchingJobs/{username:.+}",  method={RequestMethod.GET},consumes={"application/json" },produces={"application/json" })
-    public List<Job> getMatchingJobs(@PathVariable("username") String username ){
-        Candidate candidate = userService.getCandidateByEmail(username);
-        return userService.findCandidateMatchingJobs(candidate);
+    @RequestMapping(value ="/findAllJobs",  method={RequestMethod.GET}, produces={"application/json" })
+    public List<Job> getJobs(){
+        return userService.findAllJobs();
     }
-
 }

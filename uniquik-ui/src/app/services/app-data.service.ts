@@ -39,7 +39,7 @@ export class AppDataService {
 	}
 
 	findMatchingJobs(username) {
-        return this.http.get('/open/findMatchingJobs/' + username)
+        return this.http.get('/springjwt/findMatchingJobs/' + username)
             .map((response) => {
                 return response;
             });
@@ -54,16 +54,36 @@ export class AppDataService {
 		});
 	}
 	
-    searchJobs(searchIndustry, searchOccupation, searchLocation) {
-        console.log(searchIndustry);
-        console.log(searchOccupation);
-        console.log(searchLocation);
-        return this.http.get('/open/searchJobs/' + searchIndustry + "/" + searchOccupation + "/" + searchLocation)
+    searchJobs(searchIndustry, searchOccupation, searchLocation, candidateUsername) {
+        return this.http.get('/springjwt/searchJobs/' + searchIndustry + "/" + searchOccupation + "/" + searchLocation + "/" + candidateUsername)
           .map((response) => {
             return response;
         });
     }
 
+    applyToJob(jobId, candidateUsername){
+        return this.http.get('/springjwt/applyToJob/' + jobId + "/" + candidateUsername)
+        .map((response) => {
+          return response;
+      });
+        
+    }
+    
+    getAppliedJobs(candidateUsername){
+        return this.http.get('/springjwt/findJobApplicationByCandidate/' + candidateUsername)
+        .map((response) => {
+          return response;
+      });
+        
+    }
+    
+    getJobApplications(jobId){
+        return this.http.get('/springjwt/findJobApplicationByJobId/' + jobId)
+        .map((response) => {
+          return response;
+      });
+        
+    }
     
 	saveOrganization(formData){
 		console.log(formData)
@@ -121,5 +141,29 @@ export class AppDataService {
         });
     }
     
+	getJobDetails(jobId){
+        return this.http.get('/springjwt/findJobDetails/' + jobId)
+        .map((response) => {
+          return response;
+      });	    
+	}
+	
     
+	showLoader(){
+	       document.getElementById('loadingGray').style.pointerEvents = 'none';
+
+	      $( '.spinner' ).show();
+	      window.scrollTo(0, 0);
+	      $( '.parentDisable' ).show();
+
+	}
+
+   hideLoader(){
+
+       $( '.spinner' ).hide();
+          window.scrollTo(0, 0);
+          $( '.parentDisable' ).hide();
+
+    }
+
 }

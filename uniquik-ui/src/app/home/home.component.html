@@ -11,12 +11,56 @@
 	</div>
 </section>
 
+
 <br/>
+
+<span  *ngIf="isLoggedIn == 'false'"  >
+	<h2 class="section-title" style='font-size : 15px !important;padding:10px;'>Hi! {{loggedInUsername}}, </h2>
+	<br/>
+	
+	<section style='padding:30px;' class="section">
+		<div  _ngcontent-c9="" class="card mb-3" style='overflow: auto !important;'>
+			<div _ngcontent-c9="" class="card-header">
+				<span style="font-size: 14px;color: #888;font-weight: 700;margin-bottom: 15px;">Recent Activities</span>
+			</div>
+			<div _ngcontent-c9="" class="card-block table-responsive">
+				<table _ngcontent-c9="" class="table">
+					<thead _ngcontent-c9="" class="ng-tns-c9-1">
+						<tr _ngcontent-c9="" class="ng-tns-c9-1">
+							<th _ngcontent-c9="" class="ng-tns-c9-1">Job Title</th>
+							<th _ngcontent-c9="" class="ng-tns-c9-1">Applied On</th>
+							<th _ngcontent-c9="" class="ng-tns-c9-1">Status</th>
+						</tr>
+					</thead>
+					<tbody _ngcontent-c9="" class="ng-tns-c9-1">
+						<tr *ngFor="let row of jobApplications;let i=index" (click) = "getJobDetails(row.jobId, content, 0)"
+							_ngcontent-c9="" class="ng-tns-c9-1">
+							<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.jobTitle}}</td>
+							<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.appliedDate}}</td>
+							<td _ngcontent-c9="" class="ng-tns-c9-1">{{row.statusText}}</td>
+						</tr>
+						<tr *ngIf="jobApplications.length == 0">
+							<td colspan ="4">You have not applied for any job</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+	
+	
+	
+	<br/>
+
+</span>
+
+
 <section style='padding:10px;' class="find-job section">
-		<h2 class="section-title">Latest Job Openings</h2>
+		<h2  *ngIf="isLoggedIn == null || isLoggedIn == 'true'"   class="section-title">Latest Job Openings</h2>
+		<h4  *ngIf="isLoggedIn == 'false'"   class="section-title" style='font-size:15px !important;'>Current Openings base on your profile:</h4>
 	<div class="container" ><!-- container-fluid text-center bg-grey -->
 		<div slimScroll allowPageScroll="true" width="auto" height="250px" size="7px" class="row" >
-			<div  (click)="open(job, content)" *ngFor="let job of jobs; index as i;"
+			<div  (click)="open(job, content, i)" *ngFor="let job of jobs; index as i;"
 				class="col-md-12 job-list">
 				<div class="job-list-content">
 					<h4>
@@ -51,23 +95,6 @@
 </section>
 
 <br/>
-<section *ngIf="isLoggedIn == false"  style='padding:10px;' class="find-job section">
-	<h2 class="section-title">You Applied for Following Jobs</h2>
-	<div class="container" ><!-- container-fluid text-center bg-grey -->
-		<div slimScroll allowPageScroll="true" width="auto" height="250px" size="7px" class="row" >
-			<div  (click)="open(jobApp, JobApplicationContent)" *ngFor="let jobApp of jobApplications; index as i;"
-				class="col-md-12 job-list">
-				<div class="job-list-content">
-	
-				</div>
-			</div>
-			<div *ngIf="jobApplications != null && jobApplications.length== 0"  class="col-md-12 job-list">
-				<span colspan ="4">You have not applied for any Job.</span>
-			</div>
-		</div>
-	</div>
-</section>
-
 
 
 <!-- 
@@ -181,7 +208,7 @@
 				</table>
 				
 			</div>
-      		<span (click)="applyJob()" class= "btn btn-common pull-right" style='margin:5px;' >Apply</span>
+      		<span *ngIf="!isAppliedJob" (click)="jobApplication(model.selectedJob.id);d('Cross click');" class= "btn btn-common pull-right" style='margin:5px;' >Apply</span>
     	</div>
   	</div>
 </ng-template>

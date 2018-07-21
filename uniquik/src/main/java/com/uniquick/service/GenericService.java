@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.uniquick.domain.Candidate;
 import com.uniquick.domain.Job;
+import com.uniquick.domain.JobApplication;
 import com.uniquick.domain.Organization;
 import com.uniquick.domain.RandomCity;
 import com.uniquick.domain.Role;
@@ -51,4 +52,11 @@ public interface GenericService {
     
     List<Job> findCandidateMatchingJobs(Candidate candidate);
 
+    JobApplication applyToJob(Long jobId, String candidateUsername);
+    
+    List<JobApplication> findByJobId(Long jobId);
+    
+    List<JobApplication> findByCandidate(String candidateUsername);
+    
+    Job findJobDetails(Long jobId);
 }

@@ -42,10 +42,11 @@
 			background: #fff;
 			opacity: 0.8;
 			z-index: 999999;
+
 			height: 100%;
 			width: 100%;
 			opacity: 0.8;
-			 pointer-events: none;
+			 pointer-events: none !important;
 			  -webkit-user-select: none;  /* Chrome all / Safari all */
 			  -moz-user-select: none;     /* Firefox all */
 			  -ms-user-select: none;      /* IE 10+ */
@@ -108,7 +109,7 @@
 		}
 	</style>
     <div>
-    <div class="parentDisable" style='display:none;'></div>
+    <div id="loadingGray"  onclick="return false;" class="parentDisable" style='cursor-pointer:none;pointerEvents : none;display:none;'></div>
 	    
 	<div class="spinner" style='display:none;' >
 	  <div class="bounce1"></div>

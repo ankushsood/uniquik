@@ -19,7 +19,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +28,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.uniquick.domain.Candidate;
 import com.uniquick.domain.Job;
+import com.uniquick.domain.JobApplication;
 import com.uniquick.domain.RandomCity;
-import com.uniquick.domain.Role;
 import com.uniquick.domain.User;
 import com.uniquick.service.GenericService;
 
@@ -228,6 +228,74 @@ public class ResourceController {
         }
     }
 
+
+    @RequestMapping(value ="/searchJobs/{searchIndustry}/{searchOccupation}/{searchLocation}/{candidateUsername:.+}",  method={RequestMethod.GET}, produces={"application/json" })
+    public List<Job> searchJobs(@PathVariable("searchIndustry") String searchIndustry,
+    		@PathVariable("searchOccupation") String searchOccupation,
+    		@PathVariable("searchLocation") String searchLocation, 
+    		@PathVariable("candidateUsername") String candidateUsername){
+        List<Job> dbJobs = userService.findAllJobs();
+        List<Job> searchedJobs = new ArrayList<>();
+		List<JobApplication> jobApps = userService.findByCandidate(candidateUsername);
+		boolean alreadyApplied = false;
+
+        for (Job job : dbJobs) {
+        	alreadyApplied = false;
+			for (JobApplication jobApplication : jobApps) {
+				if(job.getId().equals(jobApplication.getJobId())){
+					alreadyApplied = true;
+				}
+			}
+			if(alreadyApplied)
+				continue;
+        	
+        	if(!StringUtils.isEmpty(job.getJobIndustry()) && job.getJobIndustry().contains(searchIndustry) && !searchIndustry.equals("-")){
+				searchedJobs.add(job);
+				continue;
+			}
+			if(!StringUtils.isEmpty(job.getJobOccupation()) && job.getJobOccupation().contains(searchOccupation) && !searchOccupation.equals("-")){
+				searchedJobs.add(job);
+				continue;
+			}
+			if(!StringUtils.isEmpty(job.getJobLocation()) && job.getJobLocation().contains(searchLocation) && !searchLocation.equals("-")){
+				searchedJobs.add(job);
+				continue;
+			}
+		}
+        
+        return searchedJobs;
+    }
+
+    @RequestMapping(value ="/findMatchingJobs/{username:.+}",  method={RequestMethod.GET},consumes={"application/json" },produces={"application/json" })
+    public List<Job> getMatchingJobs(@PathVariable("username") String username ){
+        Candidate candidate = userService.getCandidateByEmail(username);
+        return userService.findCandidateMatchingJobs(candidate);
+    }
+
+
+    @RequestMapping(value ="/findJobDetails/{jobId}",  method={RequestMethod.GET},consumes={"application/json" },produces={"application/json" })
+    public Job findJobDetails(@PathVariable("jobId") Long jobId ){
+    	return userService.findJobDetails(jobId);
+    }
+
+    
+    @RequestMapping(value ="/applyToJob/{jobId}/{candidateUsername:.+}",  method={RequestMethod.GET},consumes={"application/json" },produces={"application/json" })
+    @PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
+    public JobApplication applyToJob(@PathVariable("jobId") Long jobId, @PathVariable("candidateUsername") String candidateUsername){
+        return userService.applyToJob(jobId, candidateUsername);
+    }
+    
+    @RequestMapping(value ="/findJobApplicationByJobId/{jobId}",  method={RequestMethod.GET},consumes={"application/json" },produces={"application/json" })
+    @PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
+    public List<JobApplication> findJobApplicationByJobId(@PathVariable("jobId") Long jobId){
+        return userService.findByJobId(jobId);
+    }
+    
+    @RequestMapping(value ="/findJobApplicationByCandidate/{candidateUsername:.+}",  method={RequestMethod.GET},consumes={"application/json" },produces={"application/json" })
+    @PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")
+    public List<JobApplication> findJobApplicationByJobId(@PathVariable("candidateUsername") String candidateUsername){
+        return userService.findByCandidate(candidateUsername);
+    }
     
     @RequestMapping(value ="/findJobs/{orgUsername:.+}",  method={RequestMethod.GET},consumes={"application/json" },produces={"application/json" })
     @PreAuthorize("hasAuthority('ADMIN_USER') or hasAuthority('STANDARD_USER')")

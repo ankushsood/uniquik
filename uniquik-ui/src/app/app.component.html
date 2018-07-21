@@ -18,7 +18,6 @@
 					<li><a class="" *ngIf="isLoggedIn == null" (click)="toggleState()" routerLink="/login" style='color:#FF4F57 !important;font-size: 14px !important;font-weight: 300 !important;line-height: 24px !important;'>Login</a></li>
 					<li><a class="" *ngIf="isLoggedIn == 'true'" (click)="toggleState()" routerLink="/admin" style='color:#FF4F57 !important;font-size: 14px !important;font-weight: 300 !important;line-height: 24px !important;'>Find Candidates</a></li>
 					<li><a class="" *ngIf="isLoggedIn == 'true'" (click)="toggleState()" routerLink="/postJob" style='color:#FF4F57 !important;font-size: 14px !important;font-weight: 300 !important;line-height: 24px !important;'>Post New Job</a></li>
-					<li><a class="" *ngIf="isLoggedIn == 'true'" (click)="toggleState()" routerLink="/viewJobApplications" style='color:#FF4F57 !important;font-size: 14px !important;font-weight: 300 !important;line-height: 24px !important;'>Job Applications</a></li>
 
 					
 					<li><a class="" *ngIf="isLoggedIn == 'false'" (click)="toggleState()" routerLink="/user" style='color:#FF4F57 !important;font-size: 14px !important;font-weight: 300 !important;line-height: 24px !important;'>Find Jobs</a></li>

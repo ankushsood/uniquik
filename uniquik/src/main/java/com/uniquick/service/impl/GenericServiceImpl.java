@@ -3,6 +3,7 @@ package com.uniquick.service.impl;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -13,11 +14,13 @@ import org.springframework.util.StringUtils;
 
 import com.uniquick.domain.Candidate;
 import com.uniquick.domain.Job;
+import com.uniquick.domain.JobApplication;
 import com.uniquick.domain.Organization;
 import com.uniquick.domain.RandomCity;
 import com.uniquick.domain.Role;
 import com.uniquick.domain.User;
 import com.uniquick.repository.CandidateRepository;
+import com.uniquick.repository.JobApplicationRepository;
 import com.uniquick.repository.JobRepository;
 import com.uniquick.repository.OrganizationRepository;
 import com.uniquick.repository.RandomCityRepository;
@@ -29,6 +32,9 @@ import com.uniquick.service.GenericService;
 public class GenericServiceImpl implements GenericService {
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private JobApplicationRepository jobApplicationRepository;
     
     @Autowired
     private RoleRepository roleRepository;
@@ -204,12 +210,30 @@ public class GenericServiceImpl implements GenericService {
 	public List<Job> findCandidateMatchingJobs(Candidate candidate) {
 		List<Job> dbJobs = findAllJobs();
 		List<Job> matchedJobs = new ArrayList<>();
+		List<JobApplication> jobApps = jobApplicationRepository.findByCandidateUsername(candidate.getEmail());
+		boolean alreadyApplied = false;
 		for (Job job : dbJobs) {
+			alreadyApplied = false;
+			for (JobApplication jobApplication : jobApps) {
+				if(job.getId().equals(jobApplication.getJobId())){
+					alreadyApplied = true;
+				}
+			}
+			if(alreadyApplied)
+				continue;
+			if(!StringUtils.isEmpty(candidate.getPreferredIndustry()) && candidate.getPreferredIndustry().contains(job.getJobIndustry()) ){
+				matchedJobs.add(job);
+				continue;
+			}
 			if(!StringUtils.isEmpty(candidate.getEmploymentDetailsJSON()) && candidate.getEmploymentDetailsJSON().contains(job.getJobIndustry()) ){
 				matchedJobs.add(job);
 				continue;
 			}
-			if(!StringUtils.isEmpty(candidate.getEmploymentDetailsJSON()) && candidate.getEmploymentDetailsJSON().contains(job.getJobOccupation()) ){
+			if(!StringUtils.isEmpty(candidate.getPreferredOccupation()) && candidate.getPreferredOccupation().contains(job.getJobOccupation()) ){
+				matchedJobs.add(job);
+				continue;
+			}
+			if(!StringUtils.isEmpty(candidate.getExpOccupation()) && candidate.getExpOccupation().contains(job.getJobOccupation()) ){
 				matchedJobs.add(job);
 				continue;
 			}
@@ -221,12 +245,48 @@ public class GenericServiceImpl implements GenericService {
 						break;
 					}
 				}
-				
 				continue;
 			}
-
+		}
+		return matchedJobs;
+	}
+	
+	@Override
+	public JobApplication applyToJob(Long jobId, String candidateUsername) {
+		
+		List<JobApplication> dbJobApplication = jobApplicationRepository.findByCandidateUsername(candidateUsername);
+		for (JobApplication jobApplication : dbJobApplication) {
+			if(jobApplication.getJobId().equals(jobId)){
+				return null;
+			}
 		}
 		
-		return matchedJobs;
+		Job dbJob = jobRepository.findOne(jobId);
+		if(dbJob == null)
+			return null;
+		
+		JobApplication jobApp = new JobApplication();
+		jobApp.setAppliedDate(new Date());
+		jobApp.setCandidateUsername(candidateUsername);
+		jobApp.setJobId(jobId);
+		jobApp.setLastUpdated(new Date());
+		jobApp.setStatusText("Job Application Submitted Successfully.");
+		jobApp.setJobTitle(dbJob.getJobTitle());
+		return jobApplicationRepository.save(jobApp);
+	}
+	@Override
+	public List<JobApplication> findByCandidate(String candidateUsername) {
+		return jobApplicationRepository.findByCandidateUsername(candidateUsername);
+	}
+
+	@Override
+	public List<JobApplication> findByJobId(Long jobId) {
+		return jobApplicationRepository.findByJobId(jobId);
+	}
+	
+
+	@Override
+	public Job findJobDetails(Long jobId) {
+		return jobRepository.findOne(jobId);
 	}
 }

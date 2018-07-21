@@ -2,9 +2,6 @@
 <div class="container"  *ngIf="isLoaded">
 	<div class="row">
 		<div class='col-md-12' style='margin-bottom:50px;'>
-			<h4>
-				Hello {{loggedInUser.firstName}}, <br/>
-			</h4>
 			<div class="clearfix"></div>
 				<br/>
 			<fieldset class="scheduler-border">
@@ -12,7 +9,7 @@
 			    <div class="control-group">
 			        <label class="control-label input-label" for="startTime">Industry :</label>
 			        <div class="controls bootstrap-timepicker">
-						<select2 ngDefaultControl    name="industries"  [data]="industries" data-width="100%" [(ngModel)]="searchIndustry" (valueChanged)="searchIndustry = $event.value"></select2>
+						<select2 ngDefaultControl    name="industries"  [value] = "startValue" [data]="industries" data-width="100%" [(ngModel)]="searchIndustry" (valueChanged)="searchIndustry = $event.value"></select2>
 			            <i class="icon-time"></i>
 			        </div>
 			    </div>
@@ -20,7 +17,7 @@
 			    <div class="control-group">
 			        <label class="control-label input-label" for="startTime">Occupation :</label>
 			        <div class="controls bootstrap-timepicker">
-						<select2 ngDefaultControl    name="expCategories"  [data]="expCategories" data-width="100%" [(ngModel)]="searchOccupation" (valueChanged)="searchOccupation = $event.value"></select2>
+						<select2 ngDefaultControl    name="expCategories" [value] = "startValue"  [data]="expCategories" data-width="100%" [(ngModel)]="searchOccupation" (valueChanged)="searchOccupation = $event.value"></select2>
 			            <i class="icon-time"></i>
 			        </div>
 			    </div>
@@ -28,7 +25,7 @@
 			    <div class="control-group">
 			        <label class="control-label input-label" for="startTime">Location :</label>
 			        <div class="controls bootstrap-timepicker">
-						<select2 ngDefaultControl    name="searchlocation"  [data]="location" data-width="100%"  [(ngModel)]="searchLocation" (valueChanged)="searchLocation = $event.value"></select2>
+						<select2 ngDefaultControl    name="searchlocation"  [value] = "startValue" [data]="location" data-width="100%"  [(ngModel)]="searchLocation" (valueChanged)="searchLocation = $event.value"></select2>
 			            <i class="icon-time"></i>
 			        </div>
 			    </div>
@@ -41,13 +38,13 @@
 
 			<!-- Start Purchase Section -->
 			
-			<section class="find-job section">
+			<section class="find-job section" *ngIf="searchedJobs!= null"> 
 			  	<h4>
-					Matching Jobs based on your profile: <br/>
+					Search Result: <br/>
 				</h4>
-				  
+<br/>				  
 				<div slimScroll allowPageScroll="true" width="auto" height="250px" size="7px" class="row" >
-					<div  (click)="open(job, content)" *ngFor="let job of searchedJobs; index as i;" class="col-md-12 job-list">
+					<div  (click)="open(job, i, content)" *ngFor="let job of searchedJobs; index as i;" class="col-md-12 job-list">
 						<div class="job-list-content">
 							<h4>
 								<span>{{job.jobTitle}}</span> 
@@ -124,7 +121,7 @@
 				</table>
 				
 			</div>
-      		<span (click)="applyJob()" class= "btn btn-common pull-right" style='margin:5px;' >Apply</span>
+      		<span (click)="jobApplication(model.selectedJob.id);d('Cross click');" class= "btn btn-common pull-right" style='margin:5px;' >Apply</span>
     	</div>
   	</div>
 </ng-template>

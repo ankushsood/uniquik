@@ -11,7 +11,6 @@ import {AppData } from '../app.data';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-    city$;
     jobs : any = [];
     searchedJobs : any = null;
     loggedInUser : any;
@@ -24,7 +23,8 @@ export class UserComponent implements OnInit {
     location : any = AppData.location;
     industries : any = AppData.industries;
     expCategories : any = AppData.expCategories;
-    
+    startValue : string = 'Select';
+    selectedJobIndex = -1;
     constructor(private appDataService: AppDataService,
                 private router: Router,
                 private activatedRoute: ActivatedRoute,
@@ -36,29 +36,23 @@ export class UserComponent implements OnInit {
         let accessToken = localStorage.getItem('access_token');
         let decodedToken = this.jwtHelper.decodeToken(accessToken);
         this.loggedInUser = {firstName : decodedToken.user_name};
-/*      this.appDataService.getJobs(decodedToken.user_name).subscribe(
-              data =>{
-                this.jobs = data;
-                this.jobs = JSON.parse(this.jobs._body);
-                this.loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-                this.isLoaded = true;
-            } , error =>{
-                    console.log(error);
-                    this.isLoaded = true;
-    
-              });;
-*/  
     }
   
     findJob(){
-        
-        this.appDataService.searchJobs(this.searchIndustry, this.searchOccupation, this.searchLocation).subscribe(
+        this.appDataService.showLoader();
+        this.searchIndustry = this.searchIndustry == '' || this.searchIndustry == null ? '-': this.searchIndustry;
+        this.searchOccupation = this.searchOccupation == '' || this.searchOccupation == null ? '-': this.searchOccupation;
+        this.searchLocation = this.searchLocation == '' || this.searchLocation == null ? '-': this.searchLocation;
+        let accessToken = localStorage.getItem('access_token');
+        let decodedToken = this.jwtHelper.decodeToken(accessToken);
+        let loggedInUsername = decodedToken.user_name;
+
+        this.appDataService.searchJobs(this.searchIndustry, this.searchOccupation, this.searchLocation, loggedInUsername ).subscribe(
           data =>{
               this.searchedJobs = [];
-              this.jobs = data;
-              this.searchedJobs = JSON.parse(this.jobs._body);
-              //this.loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
-              //this.isLoaded = true;
+              this.searchedJobs = data.json();//JSON.parse(this.jobs._body);
+              this.appDataService.hideLoader();
+              this.loggedInUser = JSON.parse(localStorage.getItem("loggedInUser"));
             } , error =>{
                     console.log(error);
                     this.isLoaded = true;
@@ -66,13 +60,10 @@ export class UserComponent implements OnInit {
     }
   
     closeResult: string;
-
     model : any = {};
-    
-  
-  open(job, content) {
-      
+    open(job, index, content) {
       this.model.selectedJob = job;
+      this.selectedJobIndex = index;
       this.modalService.open(content).result.then((result) => {
         this.closeResult = `Closed with: ${result}`;
       }, (reason) => {
@@ -81,8 +72,6 @@ export class UserComponent implements OnInit {
     }
     
     private getDismissReason(reason: any): string {
-          
-          console.log(reason);
         if (reason === ModalDismissReasons.ESC) {
           return 'by pressing ESC';
         } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
@@ -91,7 +80,28 @@ export class UserComponent implements OnInit {
           return  `with: ${reason}`;
         }
       }
-      
-  
-  
+    
+    jobApplication(jobId){
+        this.appDataService.showLoader();
+        let accessToken = localStorage.getItem('access_token');
+        let decodedToken = this.jwtHelper.decodeToken(accessToken);
+        let loggedInUsername = decodedToken.user_name;
+
+        if(loggedInUsername != '' && loggedInUsername != null){
+            this.appDataService.applyToJob(jobId, loggedInUsername).subscribe(
+                    data =>{
+                        if(data.text() != '' && data.text() != null){
+                            this.searchedJobs.splice(this.selectedJobIndex, 1);
+                            this.appDataService.hideLoader();
+                        }
+                    } , error =>{
+                        console.log(error);
+                        
+                });    
+        }else{
+            this.router.navigate(['/login']);
+        }
+        
+    }
+
 }

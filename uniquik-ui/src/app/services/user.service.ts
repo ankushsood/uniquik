@@ -22,13 +22,13 @@ export class UserService {
     localStorage.setItem(TOKEN_NAME, accessToken);
 	
 
-			this.appDataService.findUser(decodedToken.user_name).subscribe(
-				data =>{
-					let user = data;
-					localStorage.setItem("loggedInUser", user.text());
-				} , error =>{
-					console.log(error);
-				});;
+	this.appDataService.findUser(decodedToken.user_name).subscribe(
+		data =>{
+			let user = data;
+			localStorage.setItem("loggedInUser", user.text());
+		} , error =>{
+			console.log(error);
+		});;
 
   }
 
