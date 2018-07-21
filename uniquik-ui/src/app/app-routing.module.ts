@@ -13,6 +13,7 @@ import {CandidateSignupComponent} from './candidateSignup/candidateSignup.compon
 import {PostJobComponent} from './postJob/postJob.component';
 import { ImportCandidateDataComponent } from './importCandidates/importCandidates.component';
 import { CandidateListComponent } from './candidateList/candidateList.component'; 
+import { ChangePasswordComponent } from './changePassword/changePassword.component';
 
 const routes: Routes = [
 
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+      path: 'changePassword',
+      component: ChangePasswordComponent
   },
   {
     path: 'admin',

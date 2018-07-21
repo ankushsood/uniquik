@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -19,6 +20,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -90,6 +92,25 @@ public class ResourceController {
         	return userService.findMatchingCandidates(job);
     }
     
+    @RequestMapping(value ="/changePassword", method={RequestMethod.POST},consumes={"application/json" },produces={"application/json" })
+    @PreAuthorize("hasAuthority('STANDARD_USER') or hasAuthority('ADMIN_USER')")
+    public String changePassword( @RequestBody Map<String, String> changePassword){
+    	User user = userService.findByUsername(changePassword.get("username"));
+    	if(user == null){
+    		return "Invalid User";
+    	}else{
+        	String encodedNewPass = new ShaPasswordEncoder(256).encodePassword(changePassword.get("newPassword"), null);
+        	boolean isValid = new ShaPasswordEncoder(256).isPasswordValid(user.getPassword(), changePassword.get("currentPassword"), null);
+        	
+        	if( isValid ){
+	    		user.setPassword(encodedNewPass);
+	    		userService.saveUser(user);
+	    		return "Password Updated Successfully";
+    		}else{
+    			return "Current Password is not Correct";
+    		}
+    	}
+    }
     
 
     @RequestMapping(value = "/upload", method = RequestMethod.POST)

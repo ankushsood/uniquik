@@ -24,8 +24,7 @@
 		</div>
 		<div *ngIf="error" class="alert alert-danger">{{error}}</div>
 	  </form>
-		<a *ngIf="redirectUrl=='/admin'" routerLink="/employerSignup">Employer Signup</a>
-		
-		<a *ngIf="redirectUrl=='/user'" routerLink="/candidateSignup">Signup</a>	
+		<a routerLink="/forgotPassword">Forgot Password</a>
+		<a class='pull-right' routerLink="/candidateSignup">Candidate Registration</a>	
 	</div>
 </div>

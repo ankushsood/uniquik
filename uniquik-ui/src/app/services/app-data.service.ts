@@ -106,36 +106,36 @@ export class AppDataService {
         data.prefIndustry = null;
         data.prefIndustry = null;
         data.prefLocation = null;
-        
-        console.log(data)
         let headers = new HttpHeaders({'Content-Type': 'application/json'});
         return this.openHttp.post('/open/registerCandidate',  JSON.stringify(formData), {
             headers : headers
         });
     }
 	saveJob(formData){
-		console.log(formData)
 		let headers = new HttpHeaders({'Content-Type': 'application/json'});
 		return this.http.post('/springjwt/saveJob',  JSON.stringify(formData), {
 		});
 	}
 	
 	deleteJob(formData){
-		console.log(formData)
 		let headers = new HttpHeaders({'Content-Type': 'application/json'});
 		return this.http.post('/springjwt/deleteJob',  JSON.stringify(formData), {
 		});
 	}
+
+   changePassword(formData){
+        let headers = new HttpHeaders({'Content-Type': 'application/json'});
+        return this.http.post('/springjwt/changePassword',  JSON.stringify(formData), {
+        });
+    }
 	
 	updateJob(formData){
-		console.log(formData)
 		let headers = new HttpHeaders({'Content-Type': 'application/json'});
 		return this.http.post('/springjwt/updateJob',  JSON.stringify(formData), {
 		});
 	}
 	
 	findMatchingCandidates(formData){
-        console.log(formData)
         let headers = new HttpHeaders({'Content-Type': 'application/json'});
         return this.http.post('/springjwt/findMatchingCandidates',  JSON.stringify(formData), {
         });

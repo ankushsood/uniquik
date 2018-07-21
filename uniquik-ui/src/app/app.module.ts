@@ -16,6 +16,7 @@ import { SlideMenuModule } from 'cuppa-ng2-slidemenu/cuppa-ng2-slidemenu';
 import {CandidateSignupComponent} from './candidateSignup/candidateSignup.component';
 import {EmployerSignupComponent} from './employerSignup/employerSignup.component';
 import {PostJobComponent} from './postJob/postJob.component';
+import {ChangePasswordComponent} from './changePassword/changePassword.component';
 
 import {UserService} from './services/user.service';
 import {AuthenticationService} from './services/authentication.service';
@@ -57,6 +58,7 @@ export function authHttpServiceFactory(http: Http) {
 	ImportCandidateDataComponent,
 	SlimScroll,
 	PostJobComponent,
+	ChangePasswordComponent,
 	CandidateListComponent
   ],
   imports: [
